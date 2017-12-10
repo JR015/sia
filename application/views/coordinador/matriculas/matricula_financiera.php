@@ -15,7 +15,7 @@
 
                             <div class="col-xs-10">
 
-                                <h2>Matricula estudiantil</h2>
+                                <h2>Matricula financiera</h2>
 
                             </div>
 
@@ -28,7 +28,7 @@
                     <div class="x_content">
 
 
-                        <form id="form-matricula" class="form-horizontal" method="post" action="<?=base_url('matricula/crear')?>" onsubmit="return crearMatricula()">
+                        <form id="form-matricula" class="form-horizontal" method="post" action="<?=base_url('coordinador/matriculaFinanciera')?>" onsubmit="return matricular()">
 
 
                             <div class="form-group">
@@ -66,20 +66,22 @@
                             <div class="form-group">
 
 
-                                <label class="col-md-1 control-label" for="name">Programa*</label>
+                                <label class="col-md-1 control-label" for="name">Grupo *</label>
                                 <div class="col-md-6">
 
 
-                                    <select required class="form-control" id="programa" name="programa" onchange="buscarGrupo()"  >
+
+
+                                    <select required id="grupo" onchange="buscarGrupo()" name="grupo" class="form-control">
                                         <option value="">Seleccione</option>
 
 
                                         <?php
 
-                                        foreach ($programas as $programa){
+                                        foreach ($grupos as $grupo){
 
-                                            echo '<option value="'.$programa['codigo'].'">'.$programa['nombre'].'</option>';
 
+                                            echo ' <option value="'.$grupo['codigo'].'">'.$grupo['codigo'].'</option>';
                                         }
 
                                         ?>
@@ -87,21 +89,19 @@
 
                                     </select>
 
+
+
+
                                 </div>
 
 
 
 
-                                <label class="col-md-1 control-label"  for="name">Semestre</label>
-                                <div class="col-md-3">
+                                <label class="col-md-1 control-label"  for="name">Programa </label>
+                                <div class="col-md-4">
 
-                                    <select class="form-control" onchange="buscarGrupo()" required name="semestre" id="semestre">
-                                        <option >Seleccione</option>
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>
-                                        <option value="III">III</option>
-                                        <option value="IV">IV</option>
-                                    </select>
+
+                                    <input disabled   type="text" id="programa" class="form-control">
 
                                 </div>
 
@@ -114,31 +114,31 @@
 
                             <div class="form-group">
 
-
-                                <label class="col-md-1 control-label" for="name">Jornada</label>
-                                <div class="col-md-6">
-
-                                    <select required id="jornada" name="jornada" onchange="buscarGrupo()" class="form-control">
-                                        <option value="">Seleccione</option>
-                                        <option value="M">Mañana</option>
-                                        <option value="T">Tarde</option>
-                                        <option value="S">Sábados</option>
-
-                                    </select>
-
-                                </div>
-
-
-                                <label class="col-md-1 control-label" for="name">Grupo</label>
+                                <label class="col-md-1 control-label" for="name">Semestre</label>
                                 <div class="col-md-3">
 
-                                    <select required id="grupo" name="grupo" class="form-control">
-                                        <option value="">Seleccione</option>
-
-
-                                    </select>
+                                    <input disabled   type="text" id="semestre" class="form-control">
 
                                 </div>
+
+                                <label class="col-md-1 control-label" for="name">Jornada</label>
+                                <div class="col-md-2">
+
+                                    <input disabled   type="text" id="jornada" class="form-control">
+
+                                </div>
+
+
+                                <label class="col-md-1 control-label"  for="name">Período </label>
+                                <div class="col-md-4">
+
+
+                                    <input disabled   type="text" id="periodo" class="form-control">
+
+                                </div>
+
+
+
 
                             </div>
 

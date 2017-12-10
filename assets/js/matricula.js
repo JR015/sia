@@ -10,22 +10,39 @@ $(document).ready(function () {
 function buscarGrupo() {
 
 
-    var programa = $('#programa').val();
-    var semestre = $('#semestre').val();
-    var jornada = $('#jornada').val();
+    var grupo = $('#grupo').val();
 
 
-    if(programa!="" &&  semestre!="" && jornada!=""){
+
+    if( grupo!=""){
 
         $.ajax({
             type: 'POST',
-            url: baseUrl + "matricula/consultarCodigoGrupo",
-            data: {programa: programa,semestre:semestre,jornada:jornada},
+            url: baseUrl + "coordinador/consultarDetallesDeGrupo",
+            data: {grupo:grupo},
             success: function (resp) {
 
 
-                $("#grupo").html(resp);
 
+
+                var grupo = eval(resp);
+
+
+                $.each(grupo, function (i, item) {
+
+
+
+                    $("#programa").val(grupo[i].programa);
+                    $("#jornada").val(grupo[i].jornada);
+                    $("#semestre").val(grupo[i].semestre);
+                    $("#periodo").val(grupo[i].periodo);
+
+
+                });
+
+            },error:function () {
+
+                alert("Error");
             }
 
         });
@@ -41,42 +58,12 @@ function buscarGrupo() {
 }
 
 
-function consultarGradoYNivelEscolarPorGrado() {
 
 
-    var codigo = $('#grupo').val();
 
+function matricular() {
 
-    $.ajax({
-        type: 'POST',
-        url: baseUrl + "matricula/consultarGradoYNivelEscolarPorGrado",
-        data: {codigo: codigo},
-        success: function (resp) {
-
-            datos = eval(resp);
-
-            $.each(datos, function (i, item) {
-
-                $("#grado").val(datos[i].grado);
-                $("#nivel").val(datos[i].nivel);
-
-
-            });
-
-        }
-
-    });
-
-
-    return false;
-
-
-}
-
-
-function crearMatricula() {
-
-
+    event.preventDefault();
     $.ajax({
 
 
@@ -115,7 +102,6 @@ function crearMatricula() {
     });
 
 
-    return false;
 }
 
 

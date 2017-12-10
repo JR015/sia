@@ -19,6 +19,17 @@
                         </ul>
                     </li>
 
+
+                    <li><a>Matriculas<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="<?=base_url('coordinacion-academica/matriculas')?>">Nueva matricula</a>
+                            </li>
+                            <li><a href="<?=base_url('coordinacion-academica/listado-matriculas')?>">Listado de incripciones</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                     <li><a href="<?=base_url('coordinacion-academica/periodos-academicos')?>">Periodos académicos</a></li>
 
                 </ul>
@@ -61,18 +72,18 @@
                 </ul>
             </li>
 
-            <li><a><i class="fa fa-users"></i>Grupos<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="<?/*=base_url('coordinacion-academica/gestionar-grupos')*/?>">Gestonar</a></li>
 
-
-                </ul>
-            </li>
 
 
 -->
 
+            <li><a><i class="fa fa-users"></i>Grupos<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="<?=base_url('coordinacion-academica/gestionar-grupos')?>">Gestonar</a></li>
 
+
+                </ul>
+            </li>
 
 
     </div>

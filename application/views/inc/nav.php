@@ -13,13 +13,13 @@
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;"> Perfil</a></li>
+
                         <li>
 
                             <?php
-
+/*
                             $tipo2="docente";
-                            /*
+
                              $tipo=$this->session->userdata('tipo');
 
 
@@ -37,8 +37,9 @@
 
                                 $tipo2="docente";
                             }
-   */
-                         //   echo ' <a href="'.base_url($tipo2.'/cambiar-clave-de-acceso').'">'
+      */
+                           echo ' <a href="'.base_url('/cambiar-clave-de-acceso').'">'
+
 
 
                             ?>

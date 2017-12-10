@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <section class="login_content">
 
                 <img width="50%" src="<?=base_url('assets/img/logo.png')?>" alt="Escuela de Bella Artes y Humanidades">
-                <form method="post" action="<?=base_url('sesion/iniciar_admistrativos')?>">
+                <form method="post" action="<?=base_url('sesion/iniciarCoordinador')?>">
 
 
                     <h2>Coordinación académica</h2>

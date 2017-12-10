@@ -55,33 +55,7 @@ class Matricula extends CI_Controller
     }
 
 
-    public function crear()
-    {
 
-        $documento_estudiante = $this->input->post("documento");
-        $codigo_grupo = ($this->input->post("grupo"));
-
-
-        $datos = array(
-
-            "documento_estudiante" => $documento_estudiante,
-            "codigo_grupo" => $codigo_grupo,
-
-
-        );
-
-        $existe = $this->matricula->consultar($documento_estudiante, $codigo_grupo);
-
-        if (count($existe) == 0) {
-
-            $this->matricula->crear($datos);
-
-        } else {
-
-            echo -1;
-
-        }
-    }
 
     function filtrar()
     {

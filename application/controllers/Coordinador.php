@@ -69,14 +69,53 @@ class Coordinador extends CI_Controller
 
     }
 
+
+
+    public function matriculaFinanciera()
+    {
+
+        $documento_estudiante = $this->input->post("documento");
+        $codigo_grupo = $this->input->post("grupo");
+
+
+
+
+        $datos = array(
+
+            "estudiante" => $documento_estudiante,
+            "grupo" => $codigo_grupo,
+
+
+        );
+
+        $existe = $this->coordinador->consultarMatriculaFinanciera($documento_estudiante, $codigo_grupo);
+
+
+
+
+        if (count($existe) == 0) {
+
+            $this->coordinador->matriculaFinanciera($datos);
+
+        } else {
+
+            echo -1;
+
+        }
+    }
+
     function vistaGestionarDocente()
     {
 
 
         $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
         $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'docente.js');
-
+        $datos['periodo']= $this->coordinador->consultarPeriodoAcademicoActual();
         $datos['titulo'] = "Gestionar docentes";
+
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
+
+
         $datos['contenido'] = '../coordinador/docentes/gestionar';
         $this->load->view("coordinador/plantilla", $datos);
 
@@ -126,7 +165,7 @@ class Coordinador extends CI_Controller
         $datos['css'] = array('');
         $datos['js'] = array('modalBootstrap.js','asignatura.js');
 
-
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
         $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
         $datos['titulo'] = "Gestonar asignaturas";
         $datos['contenido'] = '../coordinador/asignaturas/gestionar';
@@ -195,7 +234,7 @@ class Coordinador extends CI_Controller
 
     function vistaGestionarEstudiante()
     {
-
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
 
         $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
         $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'estudiante.js');
@@ -213,7 +252,7 @@ class Coordinador extends CI_Controller
         $datos['css'] = array('dataTables.bootstrap.css');
         $datos['js'] = array('jquery-ui.js','modalBootstrap.js','estudiante.js','datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap.min.js', 'datatables/dataTables.responsive.min.js');
 
-
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
         $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
         $datos['periodos'] = $this->coordinador->consultarPeriodosAcademicos();
 
@@ -262,7 +301,7 @@ class Coordinador extends CI_Controller
         $datos['css'] = array('');
         $datos['js'] = array('modalBootstrap.js','periodo.js');
 
-
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
 
         $datos['titulo'] = "Definir periodos académicos";
         $datos['contenido'] = '../coordinador/periodos/crear_periodos';
@@ -317,17 +356,41 @@ class Coordinador extends CI_Controller
     public function vistaGestionarGrupos(){
 
 
+        $datos['periodo']= $this->coordinador->consultarPeriodoAcademicoActual();
         $datos['css'] = array('dataTables.bootstrap.css');
         $datos['js'] = array('jquery-ui.js','modalBootstrap.js','grupo.js','datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap.min.js', 'datatables/dataTables.responsive.min.js');
 
-        $datos['grupos']= $this->coordinador->consultarTodosLosGrupos();
+        $datos['grupos']= $this->coordinador->consultarTodosLosGruposDelPeriodoActual();
         $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
-        $datos['periodo'] = $this->coordinador->consultarPeriodoAcademicoActual();
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
 
         $datos['titulo'] = "Gestonar grupos";
         $datos['contenido'] = '../coordinador/grupos/gestionar';
         $this->load->view("coordinador/plantilla", $datos);
     }
+
+
+
+    function vistaNuevaMatricula()
+    {
+
+
+        $datos['css'] = array('dataTables.bootstrap.css');
+        $datos['js'] = array('modalBootstrap.js', 'matricula.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap.min.js', 'datatables/dataTables.responsive.min.js');
+
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
+
+        $datos['estudiantes'] = $this->coordinador->consultarTodosLosEstudiantes();
+        $datos['grupos']= $this->coordinador->consultarTodosLosGruposDelPeriodoActual();
+
+        $datos['titulo'] = "Matrículas";
+        $datos['contenido'] = '../coordinador/matriculas/matricula_financiera';
+        $this->load->view("coordinador/plantilla", $datos);
+
+    }
+
+
+
 
     public function actualizarEstudiante()
     {
@@ -682,6 +745,8 @@ function vistaInscripciones(){
 
     $datos['titulo'] = "Inscripciones";
 
+    $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
+
     $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
     $datos['dg'] = $this->coordinador->consultarEstudiantesInscritos("DG");
     $datos['ap'] = $this->coordinador->consultarEstudiantesInscritos("AP");
@@ -696,19 +761,7 @@ function vistaInscripciones(){
     $this->load->view("coordinador/plantilla", $datos);
 
 }
-    function vista_selecionar_grupo()
-    {
 
-
-        // $cargaAcademica = $this->docente->colsultarCargaAcademica($this->login);
-
-
-        $datos['titulo'] = "Portal docentes";
-
-        $datos['contenido'] = 'notas/selecionar_grupo';
-        $this->load->view("docentes/plantilla", $datos);
-
-    }
 
 
     function vistaCargasAcademicas()
@@ -723,6 +776,21 @@ function vistaInscripciones(){
         $this->load->view("admistrador/plantilla", $datos);
 
 
+    }
+
+    public function consultarPeriodoAcademicoActual(){
+
+        return $this->coordinador->consultarPeriodoAcademicoActual();
+    }
+
+
+    function consultarDetallesDeGrupo(){
+
+       $grupo =  $this->input->post('grupo');
+
+      $result=  $this->coordinador->consultarDetallesDeGrupo($grupo);
+
+        echo json_encode($result);
     }
 
 

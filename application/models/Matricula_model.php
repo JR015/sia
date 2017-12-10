@@ -21,8 +21,8 @@ class Matricula_model extends CI_Model {
 
         $this->db->select("*");
         $this->db->from("matriculas");
-        $this->db->where("documento_estudiante",$documento_estudiante);
-        $this->db->where("codigo_grupo",$codigo_grupo);
+        $this->db->where("estudiante",$documento_estudiante);
+        $this->db->where("grupo",$codigo_grupo);
         $result= $this->db->get();
 
         return  $result->result_array();
@@ -123,22 +123,7 @@ class Matricula_model extends CI_Model {
 
     }
 
-    function consultarSemestreVigente(){
 
-        $this->db->select("codigo as codigo_semestre");
-        $this->db->from("semestres");
-        $this->db->order_by("codigo","DES");
-        $this->db->limit(1);
-
-
-        $result = $this->db->get();
-
-
-        return $result->result_array()[0]['codigo_semestre'];
-
-
-
-    }
 
 
 }

@@ -120,6 +120,23 @@ class Coordinador_model extends CI_Model {
     }
 
 
+
+
+    function  consultarTodosLosGruposDelPeriodoActual(){
+
+
+        $this->db->select("g.codigo,p.nombre AS programa,g.jornada, g.numero_semestre As semestre ");
+
+        $this->db->from('grupos g');
+        $this->db->join('programas p', 'p.codigo = g.programa');
+        $reslt = $this->db->get();
+        return $reslt->result_array();
+
+
+
+    }
+
+
     function crearPeriodo($anio, $semestre, $fecha_inicio, $fecha_fin)
     {
 
@@ -374,6 +391,46 @@ public function consultarGrupos(){
         $this->db->select("*");
         $this->db->from("grupos");
         $this->db->where("codigo",$codigo);
+        $result= $this->db->get();
+
+        return  $result->result_array();
+
+
+    }
+
+    function  consultarDetallesDeGrupo($codigo){
+
+
+        $this->db->select("p.nombre AS programa ,j.nombre AS jornada, g.numero_semestre AS semestre, g.periodo");
+        $this->db->from("grupos g");
+        $this->db->join('programas p','p.codigo = g.programa');
+        $this->db->join('jornadas j','j.codigo = g.jornada');
+        $this->db->where("g.codigo",$codigo);
+        $result= $this->db->get();
+
+        return  $result->result_array();
+
+
+    }
+
+    function  matriculaFinanciera($datos){
+
+
+        $this->db->insert("matriculas",$datos);
+
+
+        return $this->db->affected_rows();
+    }
+
+
+
+    function  consultarMatriculaFinanciera($documento_estudiante,$codigo_grupo){
+
+
+        $this->db->select("*");
+        $this->db->from("matriculas");
+        $this->db->where("estudiante",$documento_estudiante);
+        $this->db->where("grupo",$codigo_grupo);
         $result= $this->db->get();
 
         return  $result->result_array();

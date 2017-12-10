@@ -136,7 +136,7 @@ class Sesion extends CI_Controller {
 
 
     }
-    function iniciar_admistrativos(){
+    function iniciarCoordinador(){
 
 
         $documento = $this->input->post("documento");
@@ -159,24 +159,7 @@ class Sesion extends CI_Controller {
             $this->session->set_userdata($datos);
 
 
-            if(strcmp($tipo_usuario,"coordinadores")==0){
-
-                redirect(base_url('coordinador'));
-
-            }else if (strcmp($tipo_usuario,"docentes")==0){
-
-                redirect(base_url('docentes'));
-
-
-            }else{
-
-
-                redirect(base_url('docentes'));
-            }
-
-
-
-
+                redirect(base_url('coordinacion-academica'));
 
 
         }else{

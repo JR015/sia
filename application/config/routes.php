@@ -53,6 +53,8 @@ $route['default_controller'] = 'sesion';
 $route['docentes'] = 'docente';
 
 
+$route['cambiar-clave-de-acceso'] = 'usuario';
+
 $route['docentes/selecionar-grupo'] = 'docente/vista_selecionar_grupo';
 $route['coordinacion-academica'] = 'coordinador';
 
@@ -70,7 +72,7 @@ $route['coordinacion-academica/listado-inscripciones'] = 'coordinador/vistaLista
 $route['coordinacion-academica/gestionar-estudiantes'] = 'coordinador/vistaGestionarEstudiante';
 $route['coordinacion-academica/gestionar-asignaturas'] = 'coordinador/vistaGestionarAsignatura';
 $route['coordinacion-academica/gestionar-grupos'] = 'coordinador/vistaGestionarGrupos';
-$route['coordinacion-academica/matricular'] = 'matricula';
+$route['coordinacion-academica/matriculas'] = 'coordinador/vistaNuevaMatricula';
 
 
 $route['coordinacion-academica/planes-de-estudio'] = 'docente/vistaPlanesDeEstudio';

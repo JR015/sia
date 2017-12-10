@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="section-header">
 
-                    <h2 class="section-title text-center wow fadeInDown">Servicios</h2>
+                    <h2 class="section-title text-center wow fadeInDown">SELECIONA TU TIPO DE USUARIO</h2>
 
 
                 </div>
