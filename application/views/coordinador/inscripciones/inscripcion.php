@@ -159,9 +159,9 @@
 
                             <div class="form-group">
 
-                                <label class="col-md-2 control-label" for="name">Nombres*</label>
+                                <label class="col-md-2 control-label" for="name">Apellidos y nombres*</label>
                                 <div class="col-md-10">
-                                    <input required  id="nombres" name="nombres" type="text"  class="form-control mayus">
+                                    <input required  id="nombres" name="nombres_apellidos" type="text"  class="form-control mayus">
 
                                 </div>
 
@@ -171,16 +171,7 @@
 
 
 
-                            <div class="form-group">
 
-                                <label class="col-md-2 control-label" for="name">Apellidos*</label>
-                                <div class="col-md-10">
-                                    <input required  id="apellidos" name="apellidos" type="text"  class="form-control mayus">
-
-                                </div>
-
-
-                            </div>
 
                             <div class="form-group">
 

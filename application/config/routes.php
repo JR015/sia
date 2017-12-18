@@ -50,20 +50,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'sesion';
-$route['docentes'] = 'docente';
+$route['docente'] = 'docente';
 
 
 $route['cambiar-clave-de-acceso'] = 'usuario';
 
-$route['docentes/selecionar-grupo'] = 'docente/vista_selecionar_grupo';
+$route['docente/selecionar-grupo'] = 'docente/vista_selecionar_grupo';
 $route['coordinacion-academica'] = 'coordinador';
+$route['estudiante'] = 'estudiante';
 
-
+$route['coordinacion-academica/listado-matriculas'] = 'coordinador/vistaListadoDeMatriculas';
 
 $route['incio/coordinacion-academica'] = 'sesion/vistaInicioCordinacion';
+$route['incio/estudiante'] = 'sesion/vistaInicioEstudiante';
+$route['incio/docente'] = 'sesion/vistaInicioDocente';
 
 
-$route['coordinacion-academica/gestionar-docentes'] = 'coordinador/vistaGestionarDocente';
+$route['coordinacion-academica/gestionar-docente'] = 'coordinador/vistaGestionarDocente';
 $route['coordinacion-academica/periodos-academicos'] = 'coordinador/vistaCrearPeriodos';
 
 $route['coordinacion-academica/inscripciones'] = 'coordinador/vistaInscripciones';

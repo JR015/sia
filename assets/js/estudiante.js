@@ -70,13 +70,48 @@ function consultarInscripciones() {
 }
 
 
+function consultarMatriculas() {
+
+    event.preventDefault();
+
+    $.ajax({
+
+        url: $('#form-consulta').attr("action"),
+        type: "POST",
+        data: $('#form-consulta').serialize(),
+
+        success: function (resp) {
+
+
+
+            // valores = eval(resp);
+            $('#consulta-por-tipo').html(resp);
+            //     $('#datatable-tipos-propuesta').DataTable();
+
+
+
+
+
+
+
+        }, error: function () {
+
+            alert("Error");
+
+        }
+    });
+
+
+
+}
+
+
 function deshablitarCamposDelFormularioDeInscripcion(estado) {
 
 
     $('#tipo-documento').attr('readonly', estado);
     $("#documento").attr('readonly', estado);
     $("#nombres").attr('readonly', estado);
-    $("#apellidos").attr('readonly', estado);
     $("#fecha-nacimiento").attr('readonly', estado);
     $("#tipo-documento").attr('readonly', estado);
     $("#correo").attr('readonly', estado);
@@ -102,11 +137,12 @@ function abrirModalEditarEstudiante(documento) {
 
             var estudiante = eval(resp);
 
+
+
             $.each(estudiante, function (i, item) {
 
                 $("#documento").val(estudiante[i].documento);
-                $("#nombres").val(estudiante[i].nombres);
-                $("#apellidos").val(estudiante[i].apellidos);
+                $("#nombres").val(estudiante[i].apellidos_nombres);
                 $("#fecha-nacimiento").val(estudiante[i].fecha_nacimiento);
                 $("#tipo-documento").val(estudiante[i].tipo_documento);
                 $("#correo").val(estudiante[i].correo);

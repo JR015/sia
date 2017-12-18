@@ -51,7 +51,7 @@ function abrirModalAsigancionAcademica() {
 
     /*
 
-    $("#titulo-modal").html("Registro de docentes");
+    $("#titulo-modal").html("Registro de docente");
     $('#operacion').val("crear");
     $('#bt-operacion').val("Registrar");
 

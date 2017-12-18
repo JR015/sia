@@ -43,7 +43,7 @@
                             </h3>
                             <p>
 
-                                <a href="#" class="btn btn-primary">
+                                <a href="<?=base_url('incio/docente')?>" class="btn btn-primary">
                                     Iniciar
                                 </a>
                             </p>
@@ -62,7 +62,7 @@
                             </h3>
                             <p>
 
-                                <a href="#" class="btn btn-primary">
+                                <a href="<?=base_url('incio/estudiante')?>" class="btn btn-primary">
                                     Iniciar
                                 </a>
                             </p>

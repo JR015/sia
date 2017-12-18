@@ -24,18 +24,50 @@ class Estudiante extends CI_Controller
 
     function __construct()
     {
+
         parent::__construct();
 
         $this->login = $this->session->userdata('documento');
 
         $this->load->model("Estudiante_model", "estudiante");
 
-        if (!isset($this->login)) {
 
+        if ($this->session->userdata('tipo') != ESTUDIANTES) {
 
             redirect(base_url());
+
         }
     }
+
+    function index(){
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'estudiante.js');
+
+        $datos['titulo'] = "SIA - Estudiantes";
+
+        //  $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
+
+         $datos['periodo'] = "2018A";
+
+        /*
+        $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
+        $datos['dg'] = $this->coordinador->consultarEstudiantesInscritos("DG");
+        $datos['ap'] = $this->coordinador->consultarEstudiantesInscritos("AP");
+        $datos['cd'] = $this->coordinador->consultarEstudiantesInscritos("CD");
+        $datos['ti'] = $this->coordinador->consultarEstudiantesInscritos("TI");
+        $datos['mi'] = $this->coordinador->consultarEstudiantesInscritos("MI");
+
+        $datos['total'] = $this->coordinador->consultarEstudiantesInscritos("");
+
+*/
+        $datos['contenido'] = '../estudiante/inicio/contenido';
+        $this->load->view("estudiante/plantilla", $datos);
+
+
+    }
+
 
 
 

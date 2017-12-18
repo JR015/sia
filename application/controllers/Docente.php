@@ -43,9 +43,9 @@ class Docente extends CI_Controller {
         $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css');
         $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','docente.js');
 
-        $datos['titulo'] = "Gestionar docentes";
-        $datos['contenido'] = '../coordinador/docentes/gestionar';
-        $this->load->view("coordinador/plantilla", $datos);
+        $datos['titulo'] = "Gestionar docente";
+        $datos['contenido'] = '../docente/inicio/contenido';
+        $this->load->view("docente/plantilla", $datos);
 
     }
 
@@ -56,10 +56,10 @@ class Docente extends CI_Controller {
        // $cargaAcademica = $this->docente->colsultarCargaAcademica($this->login);
 
 
-        $datos['titulo'] = "Portal docentes";
+        $datos['titulo'] = "Portal docente";
 
         $datos['contenido'] = 'notas/selecionar_grupo';
-        $this->load->view("docentes/plantilla", $datos);
+        $this->load->view("docente/plantilla", $datos);
 
     }
 
@@ -71,7 +71,7 @@ class Docente extends CI_Controller {
         $datos['grupos'] =$this->consultarGrupos();
 
         $datos['titulo'] = "Cargas académicas";
-        $datos['contenido'] = '../coordinador/docentes/carga_academica';
+        $datos['contenido'] = '../coordinador/docente/carga_academica';
         $this->load->view("coordinador/plantilla", $datos);
 
 

@@ -114,14 +114,14 @@ function generarCodigoDeGrupo() {
 
 
     var programa = $("#programa").val();
-    var semestre = $("#semestre").val();
+    var periodo = $("#periodo").val();
     var jornada = $("#jornada").val();
     var numeroSemestre = $("#numero-semestre").val();
 
 
     if (!programa == "" && !jornada == "") {
 
-       $("#codigo").val(programa+"-"+numeroSemestre+"-"+jornada+"-" + semestre);
+       $("#codigo").val(programa+"-"+numeroSemestre+"-"+jornada+"-" + periodo);
 
       //  $("#codigo").val(programa+"-"+numeroSemestre+""+jornada+"" + semestre);
     }

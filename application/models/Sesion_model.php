@@ -11,7 +11,7 @@ class Sesion_model extends CI_Model {
 
 
         $this->db->select("documento");
-        $this->db->select("nombres");
+        $this->db->select("apellidos_nombres");
         $this->db->from($tipo_usuario);
         $this->db->where("documento",$usuario);
         $this->db->where("clave",$clave);

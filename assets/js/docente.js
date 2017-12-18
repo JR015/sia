@@ -45,7 +45,7 @@ function filtrarDocente() {
 function abrirModalCrearDocente() {
 
 
-    $("#titulo-modal").html("Registro de docentes");
+    $("#titulo-modal").html("Registro de docente");
     $('#operacion').val("registrar");
     $('#bt-operacion').val("Registrar");
 
@@ -90,11 +90,11 @@ function abrirModalEditarDocente(documento) {
 
 
 
+
             $.each(docente, function (i, item) {
 
                 $("#documento").val(docente[i].documento);
-                $("#nombres").val(docente[i].nombres);
-                $("#apellidos").val(docente[i].apellidos);
+                $("#nombres").val(docente[i].apellidos_nombres);
                 $("#fecha-nacimiento").val(docente[i].fecha_nacimiento);
                 $("#correo").val(docente[i].correo);
 
@@ -185,6 +185,7 @@ function registrarDocente() {
 
 
                     if(resp == '2'){
+
 
                         location.reload(true);
                     }else{

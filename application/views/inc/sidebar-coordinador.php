@@ -24,7 +24,7 @@
                         <ul class="nav child_menu">
                             <li class="sub_menu"><a href="<?=base_url('coordinacion-academica/matriculas')?>">Nueva matricula</a>
                             </li>
-                            <li><a href="<?=base_url('coordinacion-academica/listado-matriculas')?>">Listado de incripciones</a>
+                            <li><a href="<?=base_url('coordinacion-academica/listado-matriculas')?>">Listado de matriculas</a>
                             </li>
 
                         </ul>
@@ -48,21 +48,24 @@
                 </ul>
             </li>
 
-           <!--
-
-
 
             <li><a><i class="fa fa-user-o"></i>Docentes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
 
 
-                    <li><a href="<?/*=base_url('coordinacion-academica/gestionar-docentes')*/?>">Gestonar</a></li>
-                    <li><a href="<?/*=base_url('admin/cargas-academicas')*/?>">Carga académica</a></li>
-                    <li><a href="<?/*=base_url('admin/planes-de-estudio')*/?>">Planes de estudio</a></li>
+                    <li><a href="<?=base_url('coordinacion-academica/gestionar-docente')?>">Gestonar</a></li>
+                    <li><a href="<?=base_url('admin/cargas-academicas')?>">Carga académica</a></li>
+                    <li><a href="<?=base_url('admin/planes-de-estudio')?>">Planes de estudio</a></li>
 
 
                 </ul>
             </li>
+
+           <!--
+
+
+
+
 
             <li><a><i class="fa fa-book"></i>Asiganaturas<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">

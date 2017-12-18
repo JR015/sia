@@ -6,7 +6,7 @@ $this->load->view("inc/css");
 $this->load->view("inc/end_head");
 $this->load->view("inc/sidebar-docente");
 $this->load->view("inc/nav");
-$this->load->view("docentes/".$contenido);
+$this->load->view("docente/".$contenido);
 $this->load->view("inc/start_footer");
 $this->load->view("inc/js");
 ?>

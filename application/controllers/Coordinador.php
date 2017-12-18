@@ -111,7 +111,7 @@ class Coordinador extends CI_Controller
         $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
         $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'docente.js');
         $datos['periodo']= $this->coordinador->consultarPeriodoAcademicoActual();
-        $datos['titulo'] = "Gestionar docentes";
+        $datos['titulo'] = "Gestionar docente";
 
         $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
 
@@ -246,7 +246,7 @@ class Coordinador extends CI_Controller
     }
 
 
-    public function vistaListadodeInscripciones(){
+    public function vistaListadoDeInscripciones(){
 
 
         $datos['css'] = array('dataTables.bootstrap.css');
@@ -258,6 +258,24 @@ class Coordinador extends CI_Controller
 
         $datos['titulo'] = "Listado de inscripciones";
         $datos['contenido'] = '../coordinador/inscripciones/listado';
+        $this->load->view("coordinador/plantilla", $datos);
+
+
+    }
+
+    public function vistaListadoDeMatriculas(){
+
+
+        $datos['css'] = array('dataTables.bootstrap.css');
+        $datos['js'] = array('jquery-ui.js','modalBootstrap.js','estudiante.js','datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap.min.js', 'datatables/dataTables.responsive.min.js');
+
+        $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
+        $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
+        $datos['periodos'] = $this->coordinador->consultarPeriodosAcademicos();
+        $datos['jornadas'] = $this->coordinador->consultarJornadas();
+
+        $datos['titulo'] = "Listado de inscripciones";
+        $datos['contenido'] = '../coordinador/matriculas/listado';
         $this->load->view("coordinador/plantilla", $datos);
 
 
@@ -356,7 +374,7 @@ class Coordinador extends CI_Controller
     public function vistaGestionarGrupos(){
 
 
-        $datos['periodo']= $this->coordinador->consultarPeriodoAcademicoActual();
+
         $datos['css'] = array('dataTables.bootstrap.css');
         $datos['js'] = array('jquery-ui.js','modalBootstrap.js','grupo.js','datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap.min.js', 'datatables/dataTables.responsive.min.js');
 
@@ -456,8 +474,7 @@ class Coordinador extends CI_Controller
 
         $documento = $this->input->post("documento");
         $programa = $this->input->post("programa");
-        $nombres = mb_strtoupper($this->input->post("nombres"));
-        $apellidos = mb_strtoupper($this->input->post("apellidos"));
+        $apellidos_nombres = mb_strtoupper($this->input->post("nombres"));
         $fecha_nacimiento = $this->input->post("fecha-nacimiento");
         $correo = mb_strtoupper($this->input->post("correo"));
         $tipo_documento = mb_strtoupper($this->input->post("tipo-documento"));
@@ -474,8 +491,7 @@ class Coordinador extends CI_Controller
 
             "documento" => $documento,
             "clave" => $documento,
-            "nombres" => $nombres,
-            "apellidos" => $apellidos,
+            "apellidos_nombres" => $apellidos_nombres,
             "fecha_nacimiento" => $fecha_nacimiento,
             "tipo_documento" => $tipo_documento,
             "correo" => $correo,
@@ -507,7 +523,7 @@ class Coordinador extends CI_Controller
 
             if ($registro > 0 && $inscripcion > 0) {
 
-                redirect(base_url('coordinador/inscripciones'));
+                redirect(base_url('coordinacion-academica/inscripciones'));
             }
 
         }else{
@@ -531,8 +547,8 @@ class Coordinador extends CI_Controller
 
 
         $documento = $this->input->post("documento");
-        $nombres = mb_strtoupper($this->input->post("nombres"));
-        $apellidos = mb_strtoupper($this->input->post("apellidos"));
+        $apellidos_nombres = mb_strtoupper($this->input->post("nombres"));
+
         $fecha_nacimiento = $this->input->post("fecha-nacimiento");
         $correo = mb_strtoupper($this->input->post("correo"));
         $profesiones = mb_strtoupper($this->input->post("profesiones"));
@@ -549,9 +565,7 @@ class Coordinador extends CI_Controller
         $datos = array(
 
             "documento" => $documento,
-            "clave" => $documento,
-            "nombres" => $nombres,
-            "apellidos" => $apellidos,
+            "apellidos_nombres" => $apellidos_nombres,
             "fecha_nacimiento" => $fecha_nacimiento,
             "profesiones" => $profesiones,
             "correo" => $correo,
@@ -563,14 +577,21 @@ class Coordinador extends CI_Controller
 
         );
 
-        if (strcmp($operacion,'crear')==0){
+        if (strcmp($operacion,'registrar')==0){
+
+
+
+            $datos['clave']=$documento;
+
 
 
             $existe = $this->coordinador->consultarDocente($documento);
 
             if (count($existe)  == 0) {
 
-                $this->coordinador->registrarDocente($datos);
+               $registro = $this->coordinador->registrarDocente($datos);
+
+                echo $registro;
 
             } else {
 
@@ -621,8 +642,8 @@ class Coordinador extends CI_Controller
                 echo '<tr>
 
                     <td>' . $estudiante['documento'] . '</td>
-                    <td>' . $estudiante['nombres'] .' '.$estudiante['apellidos']. '</td>
-                    <td>' . $estudiante['apellidos'] . '</td>
+                    <td>' . $estudiante['apellidos_nombres'] .'</td>
+                     <td>' . $estudiante['correo'] . '</td>
                     <td class="text-center"><a href="javascript:abrirModalEditarEstudiante('.$estudiante['documento'].')" class="fa fa-edit"></a></td>
                 </tr>';
 
@@ -658,7 +679,7 @@ class Coordinador extends CI_Controller
                     echo '<tr>
 
                     <td>' . $docente['documento'] . '</td>
-                    <td>' . $docente['nombres'] .' '. $docente['apellidos'] . '</td>
+                    <td>' . $docente['apellidos_nombres']  . '</td>
                     <td>' . $docente['correo'] . '</td>
                     <td class="text-center"><a href="javascript:abrirModalEditarDocente('.$docente['documento'].')" class="fa fa-edit"></a></td>
                 </tr>';
@@ -737,7 +758,75 @@ class Coordinador extends CI_Controller
 
     }
 
-function vistaInscripciones(){
+
+    public function consultarMatriculas(){
+
+
+        $programa = $this->input->post('programa');
+        $periodo = $this->input->post('periodo');
+        $semestre = $this->input->post('semestre');
+        $jornada = $this->input->post('jornada');
+
+        $matriculas = $this->coordinador->consultarMatriculas($periodo, $programa,$semestre,$jornada);
+
+        echo '<table id="datatable-tipos-propuesta" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%"  >
+                                <thead>
+                                <tr>
+
+                                    <th width="20">Período</th>
+                                    <th width="250">Programa</th>
+                                    <th >Estudiante</th>
+                                    <th width="20">Semestre</th>
+                                    <th width="100">Jornada</th>
+                                 
+
+
+
+                                </tr>
+                                </thead>
+
+
+                             <tbody>
+
+
+
+
+';
+
+        foreach ($matriculas as $inscripcion) {
+
+            echo '  <tr>
+                                    
+                                                     
+                                                <td class="mayus" > ' . $inscripcion['periodo'] . '</td >
+                                                <td class="mayus" > ' . $inscripcion['programa'] . '</td >
+                                                <td class="mayus" > ' . $inscripcion['estudiante'] . '</td >
+                                                  <td class="mayus text-center" > ' . $inscripcion['semestre'] . '</td >
+                                                    <td class="mayus text-center" > ' . $inscripcion['jornada'] . '</td >
+                                                
+                                       
+
+
+                </tr >';
+
+
+        }
+
+
+        echo '
+
+                                </tbody>
+
+                            </table>
+
+
+        ';
+
+
+    }
+
+
+    function vistaInscripciones(){
 
 
     $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
@@ -772,7 +861,7 @@ function vistaInscripciones(){
         $datos['grupos'] = $this->consultarGrupos();
 
         $datos['titulo'] = "Cargas académicas";
-        $datos['contenido'] = '../admistrador/docentes/carga_academica';
+        $datos['contenido'] = '../admistrador/docente/carga_academica';
         $this->load->view("admistrador/plantilla", $datos);
 
 

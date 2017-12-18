@@ -23,9 +23,9 @@ class Coordinador_model extends CI_Model {
 
     function filtrarEstudiante($nombres){
 
-        $this->db->select("*");
-        $this->db->like('nombres', $nombres);
-        $this->db->or_like('apellidos', $nombres);
+        $this->db->select("apellidos_nombres,documento,correo");
+        $this->db->like('apellidos_nombres', $nombres);
+       // $this->db->or_like('apellidos', $nombres);
         $this->db->from('estudiantes');
         $reslt = $this->db->get();
         return $reslt->result_array();
@@ -125,10 +125,11 @@ class Coordinador_model extends CI_Model {
     function  consultarTodosLosGruposDelPeriodoActual(){
 
 
-        $this->db->select("g.codigo,p.nombre AS programa,g.jornada, g.numero_semestre As semestre ");
+        $this->db->select("g.codigo,p.nombre AS programa,j.nombre AS jornada, g.numero_semestre As semestre ");
 
         $this->db->from('grupos g');
         $this->db->join('programas p', 'p.codigo = g.programa');
+        $this->db->join('jornadas j', 'j.codigo = g.jornada');
         $reslt = $this->db->get();
         return $reslt->result_array();
 
@@ -276,6 +277,19 @@ class Coordinador_model extends CI_Model {
 
     }
 
+    function  consultarJornadas(){
+
+
+        $this->db->select("*");
+        $this->db->from("jornadas");
+
+        $result= $this->db->get();
+
+        return  $result->result_array();
+
+
+    }
+
     function  consultarPeriodosAcademicos(){
 
 
@@ -294,7 +308,7 @@ class Coordinador_model extends CI_Model {
     public function consultarInscripciones($periodo=null, $programa=null){
 
 
-        $this->db->select("i.periodo,i.programa, CONCAT(e.nombres,' ',e.apellidos) AS estudiante, p.nombre AS programa",FALSE);
+        $this->db->select("i.periodo,i.programa, e.nombres_apellidos AS estudiante, p.nombre AS programa",FALSE);
         $this->db->from("inscripciones i");
         $this->db->join("estudiantes e","i.estudiante= e.documento");
         $this->db->join("programas p","i.programa= p.codigo");
@@ -311,6 +325,46 @@ class Coordinador_model extends CI_Model {
 
 
         $this->db->order_by("i.periodo","DESC");
+        $result= $this->db->get();
+
+        return  $result->result_array();
+
+
+    }
+
+
+    public function consultarMatriculas($periodo=null, $programa=null,$semestre=null,$jornada=null){
+
+
+        $this->db->select("g.periodo,g.numero_semestre AS semestre, j.nombre AS jornada, e.nombres_apellidos AS estudiante, p.nombre AS programa",FALSE);
+        $this->db->from("matriculas m");
+        $this->db->join("estudiantes e","m.estudiante= e.documento");
+        $this->db->join("grupos g","g.codigo= m.grupo");
+        $this->db->join("programas p","g.programa= p.codigo");
+        $this->db->join("jornadas j","j.codigo= g.jornada");
+
+        if (!empty($periodo)){
+
+            $this->db->where("g.periodo",$periodo);
+        }
+
+        if (!empty($programa)){
+
+            $this->db->where("g.programa",$programa);
+        }
+
+
+        if (!empty($semestre)){
+
+            $this->db->where("g.numero_semestre",$semestre);
+        }
+
+        if (!empty($jornada)){
+
+            $this->db->where("g.jornada",$jornada);
+        }
+
+        $this->db->order_by("g.periodo","DESC");
         $result= $this->db->get();
 
         return  $result->result_array();
@@ -346,8 +400,8 @@ public function consultarGrupos(){
     function filtrarDocente($nombres){
 
         $this->db->select("*");
-        $this->db->like('nombres', $nombres);
-        $this->db->or_like('apellidos', $nombres);
+        $this->db->like('apellidos_nombres', $nombres);
+      //  $this->db->or_like('apellidos_nombr', $nombres);
         $this->db->from('docentes');
         $reslt = $this->db->get();
         return $reslt->result_array();

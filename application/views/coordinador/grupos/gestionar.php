@@ -43,7 +43,7 @@
                             <thead>
                             <tr>
 
-                                <th width="150">Código</th>
+                                <th width="100">Código</th>
                                 <th>Programa</th>
                                 <th width="10px">Semestre</th>
                                 <th  width="10px">Jornada</th>
@@ -95,7 +95,7 @@
                 <h4 class="modal-title" id="myModalLabel">
 
                     <i class="fa fa-bars"></i>
-                    <b id="titulo-modal">Registro de asignatura</b></h4>
+                    <b id="titulo-modal">Registro de grupos</b></h4>
             </div>
 
 
@@ -145,7 +145,7 @@
                             </select>
 
 
-                            <input class="form-control" readonly value="2017A" type="hidden" id="semestre" name="semestre">
+                            <input class="form-control" readonly value="<?=$periodo?>" type="hidden" id="periodo" name="periodo">
 
                         </div>
 

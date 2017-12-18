@@ -11,7 +11,7 @@ class Docentes_model extends CI_Model {
     {
         parent::__construct();
 
-        $this->semestreVigente = $this->consultarSemestreVigente();
+      //  $this->semestreVigente = $this->consultarSemestreVigente();
     }
 
 
@@ -40,7 +40,7 @@ class Docentes_model extends CI_Model {
         $this->db->select("documento AS value, CONCAT(nombres,' ',apellidos)  AS label", FALSE);
         $this->db->like('nombres', $nombres);
         $this->db->or_like('apellidos', $nombres);
-        $this->db->from('docentes');
+        $this->db->from('docente');
         $reslt = $this->db->get();
         return $reslt->result_array();
 
@@ -78,7 +78,7 @@ class Docentes_model extends CI_Model {
         $this->db->select("*");
         $this->db->like('nombres', $nombres);
         $this->db->or_like('apellidos', $nombres);
-        $this->db->from('docentes');
+        $this->db->from('docente');
         $reslt = $this->db->get();
         return $reslt->result_array();
 
@@ -87,7 +87,7 @@ class Docentes_model extends CI_Model {
 
     function  consultarTodos(){
 
-        $result= $this->db->get("docentes");
+        $result= $this->db->get("docente");
         return  $result->result_array();
 
     }

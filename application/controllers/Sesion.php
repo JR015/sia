@@ -31,7 +31,7 @@ class Sesion extends CI_Controller {
 
     public function vista_inicio(){
 
-        redirect(base_url('docentes'));
+        redirect(base_url('docente'));
 
     }
 
@@ -50,15 +50,15 @@ class Sesion extends CI_Controller {
 
                 redirect(base_url('coordinacion-academica'));
 
-            }else if (strcmp($tipo_usuario,"docentes")==0){
+            }else if (strcmp($tipo_usuario,"docente")==0){
 
-                redirect(base_url('docentes'));
+                redirect(base_url('docente'));
 
 
             }else{
 
 
-                redirect(base_url('docentes'));
+                redirect(base_url('estudiante'));
             }
 
         }else{
@@ -83,14 +83,27 @@ class Sesion extends CI_Controller {
         $this->load->view('inicio/sesion/coordinacion');
     }
 
+    public function vistaInicioEstudiante(){
 
 
-    function iniciar(){
+        $this->load->view('inicio/sesion/estudiante');
+    }
+
+
+    public function vistaInicioDocente(){
+
+
+        $this->load->view('inicio/sesion/docente');
+    }
+
+
+
+    function iniciarEstudiante(){
 
 
         $documento = $this->input->post("documento");
         $clave = $this->input->post("clave");
-        $tipo_usuario= $this->input->post("tipo-usuario");
+        $tipo_usuario= ESTUDIANTES;
 
 
         $result= $this->sesion->iniciar($documento,$clave,$tipo_usuario);
@@ -99,49 +112,33 @@ class Sesion extends CI_Controller {
 
             $datos = array(
                 "documento"=>$result[0]['documento'],
-                "nombres"=>$result[0]['nombres'],
+                "nombres"=>$result[0]['apellidos_nombres'],
                 "tipo"=>$tipo_usuario,
 
 
-                               );
+            );
 
             $this->session->set_userdata($datos);
 
 
-            if(strcmp($tipo_usuario,"coordinadores")==0){
-
-                redirect(base_url('coordinacion-academica'));
-
-            }else if (strcmp($tipo_usuario,"docentes")==0){
-
-                redirect(base_url('docentes'));
-
-
-            }else{
-
-
-                redirect(base_url('docentes'));
-            }
-
-
-
-
+            redirect(base_url('estudiante'));
 
 
         }else{
 
-           redirect(base_url('incio/coordinacion-academica')."?error=1");
+            redirect(base_url('incio/estudiante')."?error=1");
 
         }
 
 
     }
-    function iniciarCoordinador(){
+
+    function iniciarDocente(){
 
 
         $documento = $this->input->post("documento");
         $clave = $this->input->post("clave");
-        $tipo_usuario= "coordinadores";
+        $tipo_usuario= DOCENTES;
 
 
         $result= $this->sesion->iniciar($documento,$clave,$tipo_usuario);
@@ -150,7 +147,42 @@ class Sesion extends CI_Controller {
 
             $datos = array(
                 "documento"=>$result[0]['documento'],
-                "nombres"=>$result[0]['nombres'],
+                "nombres"=>$result[0]['apellidos_nombres'],
+                "tipo"=>$tipo_usuario,
+
+
+            );
+
+            $this->session->set_userdata($datos);
+
+
+            redirect(base_url('docente'));
+
+
+        }else{
+
+            redirect(base_url('incio/docente')."?error=1");
+
+        }
+
+
+    }
+
+    function iniciarCoordinador(){
+
+
+        $documento = $this->input->post("documento");
+        $clave = $this->input->post("clave");
+        $tipo_usuario= COORDINADORES;
+
+
+        $result= $this->sesion->iniciar($documento,$clave,$tipo_usuario);
+
+        if(count($result)>0){
+
+            $datos = array(
+                "documento"=>$result[0]['documento'],
+                "nombres"=>$result[0]['apellidos_nombres'],
                 "tipo"=>$tipo_usuario,
 
 
