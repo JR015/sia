@@ -186,6 +186,7 @@
 
 
 
+
                                 <label class="col-md-2 control-label" for="name">Teléfono fijo </label>
                                 <div class="col-md-4">
 
