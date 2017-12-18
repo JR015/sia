@@ -164,6 +164,7 @@
 
 
 
+
                                 <label class="col-md-2 control-label" for="name">Lugar de residencia </label>
                                 <div class="col-md-4">
 
