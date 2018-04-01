@@ -18,6 +18,13 @@
                     </div>
                     <div class="x_content">
 
+
+                        <?php
+
+
+
+?>
+
                         <form id="cambiar-clave" class="form-horizontal form-label-left" method="post" action="<?=base_url('usuario/cambiarClaveDeAcceso')?>" onsubmit="return cambiarClave();">
 
 
@@ -55,9 +62,9 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
 
-                                    <input type="reset"  class="btn btn-primary" value="Cancelar">
+                                    <input type="reset"  class="btn btn-success" value="Cancelar">
 
-                                    <input type="submit" disabled  class="btn btn-success" value="Cambiar clave">
+                                    <input type="submit" disabled  class="btn btn-primary" value="Cambiar clave">
 
                                 </div>
                             </div>
@@ -74,7 +81,7 @@
 
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Lo que debe de tener en cuenta!!!</h2>
+                        <h2>Debe de tener en cuenta</h2>
                         <ul class="nav navbar-right panel_toolbox"></ul>
                         <div class="clearfix"></div>
                     </div>
@@ -85,7 +92,7 @@
 
                             <p class="text-justify"> <span class="fa fa-check-circle"></span> La clave debe contener como mínino <strong>8</strong> caracteres de longitud.</p>
 
-                            <p class="text-justify"> <span class="fa fa-check-circle"></span> El cambio de clave se realiza de forma inmediata. Podrá usar su nueva clave apartir del próximo inicio de sesión.</p>
+                            <p class="text-justify"> <span class="fa fa-check-circle"></span> El cambio de clave se realiza de forma inmediata por ende se cierrá la sesión actual. Podrá usar su nueva clave apartir del próximo inicio de sesión.</p>
 
                         </div>
 

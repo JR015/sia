@@ -12,7 +12,7 @@
 
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-offset-2 col-md-4">
                     <div class="h-service">
                         <div class="icon-wrap ico-bg round-fifty wow fadeInDown">
                             <i class="fa fa-user-circle-o">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="h-service-content wow fadeInUp">
                             <h3>
-                                COORDINACIÓN ACADÉMICA
+                                REGISTRO Y CONTROL
                             </h3>
                             <p>
 
@@ -31,7 +31,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+
+
+
+<!--                <div class="col-md-4">
                     <div class="h-service">
                         <div class="icon-wrap ico-bg round-fifty wow fadeInDown">
                             <i class="fa fa-user">
@@ -43,13 +46,13 @@
                             </h3>
                             <p>
 
-                                <a href="<?=base_url('incio/docente')?>" class="btn btn-primary">
+                                <a href="<?/*=base_url('incio/docente')*/?>" class="btn btn-primary">
                                     Iniciar
                                 </a>
                             </p>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="col-md-4">
                     <div class="h-service">
                         <div class="icon-wrap ico-bg round-fifty wow fadeInDown">

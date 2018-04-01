@@ -1,25 +1,31 @@
-$(document).ready(function () {
 
-    function onAddTag(tag) {
-        alert("Added a tag: " + tag);
+
+
+$('.lugares').select2({
+    placeholder: 'BUSCAR',
+    minimumInputLength: 1,
+    allowClear:true,
+    dropdownParent: $("#modal-registrar"),
+
+    ajax: {
+        url: BASE_URL + "coordinador/filtrarMunicipios",
+        data: function (params) {
+            //console.log(params);
+            return {
+                nombre: params.term, // search term
+                //page: params.id
+            };
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(JSON.parse(data), function (obj) {
+                    return {id: obj.codigo, text: obj.nombre+" - "+obj.dpto };
+                })
+            };
+        },
+        cache: true
     }
-
-    function onRemoveTag(tag) {
-        alert("Removed a tag: " + tag);
-    }
-
-    function onChangeTag(input, tag) {
-        alert("Changed a tag: " + tag);
-    }
-
-    $('#profesiones').tagsInput({
-        width: 'auto'
-    });
-
 });
-
-
-
 
 
 
@@ -31,7 +37,7 @@ function filtrarDocente() {
 
     $.ajax({
         type: 'POST',
-        url: baseUrl+"coordinador/filtrarDocente",
+        url: BASE_URL+"coordinador/filtrarDocente",
         data:  {nombres:nombres},
         success: function (datos) {
             $('#agrega-registros').html(datos);
@@ -58,30 +64,16 @@ function abrirModalCrearDocente() {
 
 
 
-function quitarInputs() {
-
-
-    var profesiones = $('#profesiones').val();
-
-    profesiones= profesiones.split(",");
-
-    for (var j = 0; j < profesiones.length; j++) {
-
-        $('#profesiones').removeTag(profesiones[j]);
-    }
-
-
-}
 
 function abrirModalEditarDocente(documento) {
 
 
-    quitarInputs();
+
 
 
 
     $.ajax({
-        url: baseUrl+"coordinador/consultarDocente",
+        url: BASE_URL+"coordinador/consultarDocente",
         type: "POST",
         data: {documento: documento},
         success: function (resp) {
@@ -94,7 +86,9 @@ function abrirModalEditarDocente(documento) {
             $.each(docente, function (i, item) {
 
                 $("#documento").val(docente[i].documento);
-                $("#nombres").val(docente[i].apellidos_nombres);
+                $("#nombres").val(docente[i].nombres);
+                $("#apellidos").val(docente[i].apellidos);
+
                 $("#fecha-nacimiento").val(docente[i].fecha_nacimiento);
                 $("#correo").val(docente[i].correo);
 
@@ -102,6 +96,7 @@ function abrirModalEditarDocente(documento) {
                 $("#direccion").val(docente[i].direccion);
                 $("#telefono-fijo").val(docente[i].telefono_fijo);
                 $("#telefono-celular").val(docente[i].telefono_celular);
+                $("#correo-institucional").val(docente[i].correo_institucional);
 
                 $('#municipio').html('<option value="' + docente[i].municipio + '">' + docente[i].nombre_municipio+ '</option>');
 
@@ -112,31 +107,6 @@ function abrirModalEditarDocente(documento) {
                 $('#documento').attr('readonly', true);
 
 
-                var profesiones= docente[i].profesiones;
-
-                if(profesiones!=null){
-
-                    profesiones = docente[i].profesiones.split(",");
-
-                    for (var j = 0; j < profesiones.length; j++) {
-
-                        $('#profesiones').addTag(profesiones[j]);
-                    }
-
-                }
-
-                var telefonos= docente[i].telefonos;
-
-                if(telefonos!=null){
-
-                    telefonos = docente[i].telefonos.split(",");
-
-                    for (var j = 0; j < telefonos.length; j++) {
-
-                        $('#telefonos').addTag(telefonos[j]);
-                    }
-
-                }
 
 
 
@@ -202,10 +172,11 @@ function registrarDocente() {
 
                     $('#mensaje').html(mensaje).show(200).delay(4000).hide(200);
 
-
-                    quitarInputs();
-
                     $('#crear-docente')[0].reset();
+
+
+
+
 
                     $("#documento").focus();
                 }

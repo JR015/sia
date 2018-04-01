@@ -7,3 +7,15 @@
 <script src="<?= base_url('assets/js/libs/prefixfree.min.js');?>"></script>
 
 
+
+<!--
+<script src="<?/*=base_url('assets/js/datatables/buttons/dataTables.buttons.min.js') */?> "></script>
+<script src="<?/*=base_url('assets/js/datatables/buttons/buttons.bootstrap.min.js') */?> "></script>
+
+
+<script src="<?/*=base_url('assets/js/datatables/buttons/buttons.flash.min.js') */?>"></script>
+
+<script src="<?/*=base_url('assets/js/datatables/buttons/buttons.html5.min.js') */?> "></script>
+
+<script src="<?/*=base_url('assets/js/datatables/buttons/buttons.print.min.js') */?>"></script>
+-->

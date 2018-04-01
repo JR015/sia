@@ -26,7 +26,7 @@ if(isset($js)) {
 
 <?php
 
-$this->load->view("inc/end_footer",$periodo);
+$this->load->view("inc/end_footer");
 
 ?>
 

@@ -1,1 +1,1 @@
-const  baseUrl="http://localhost/sia/";
+const  BASE_URL="http://localhost/sia/";

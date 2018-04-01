@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="<?php echo base_url();?>assets/img/favicon.ico">
 
-    <title>Inicio de sesión </title>
+    <title> SIA - Inicio de sesión </title>
 
 
     <link href="<?= base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet">

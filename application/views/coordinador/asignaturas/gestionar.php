@@ -21,7 +21,7 @@
 
                             <div class="col-xs-2">
 
-                                <button class="right btn btn-primary full-width" onclick="abrirModalCrearAsignatura()">Nueva
+                                <button class="pull-right full-width btn btn-primary" onclick="abrirModalCrearAsignatura()">Nueva
 
                                     <i class="fa fa-plus-circle"></i>
 
@@ -40,7 +40,7 @@
                             <div class="form-group">
 
                                 <label class="col-md-2 control-label" for="name">Buscar asignatura</label>
-                                <div class="col-md-9">
+                                <div class="col-md-10">
 
                                     <input  placeholder="Nombres" id="filtro-asignatura" type="text"
                                            class="form-control mayus" onkeyup="return filtrarAsignatura()">
@@ -61,8 +61,7 @@
 
                                 <th width="100">Código</th>
                                 <th>Nombre</th>
-                                <th width="170">Programa</th>
-                                <th width="70"># Horas</th>
+                                <th width="90"># Horas</th>
                                 <th width="50">Editar</th>
 
 
@@ -85,7 +84,7 @@
 <!-- /page content -->
 
 
-<div class="modal modal-wide2 fade" id="modal-crear-asignatura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal modal-wide55 fade" id="modal-crear-asignatura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content ">
@@ -133,42 +132,18 @@
                     <div class="form-group">
 
                         <label class="col-md-2 control-label" for="name">Abreviatura*</label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input required title="EJEMPLO: LENGUA CASTELLANA, L. CASTELLANA"  id="abreviatura" name="abreviatura" maxlength="20" type="text" class="form-control mayus">
 
                         </div>
 
-                        <label class="col-md-2 control-label" for="name">Horas semanales*</label>
-                        <div class="col-md-2">
+                        <label class="col-md-2 control-label" for="name">Créditos*</label>
+                        <div class="col-md-4">
 
 
-                            <input required  id="horas-semanales" name="horas-semanales" type="number" max="4" min="1" class="form-control">
-
-                        </div>
-
-                        <label class="col-md-1 control-label" for="name">Programa*</label>
-                        <div class="col-md-3">
-
-
-                            <select class="form-control" name="programa" id="programa">
-                                <option value="">SELECCIONE</option>
-
-
-                                <?php
-
-
-                                    foreach ($programas as $programa){
-
-                                     echo ' <option value="'.$programa['codigo'].'">'.$programa['nombre'].'</option>';
-
-                                    }
-
-                                ?>
-
-                            </select>
+                            <input required  id="creditos" name="creditos" type="number" max="4" min="1" class="form-control">
 
                         </div>
-
 
                     </div>
 
@@ -189,8 +164,9 @@
 
                 <div class="modal-footer">
 
-                    <input type="button" data-dismiss="modal" value="Cancelar" class="btn btn-success"/>
                     <input type="submit" id="bt-operacion" value="Crear" class="btn btn-primary"/>
+
+                    <input type="button" data-dismiss="modal" value="Cancelar" class="btn btn-success"/>
                 </div>
             </form>
         </div>

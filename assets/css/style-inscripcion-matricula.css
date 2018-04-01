@@ -1,0 +1,98 @@
+
+
+
+.btn-primary{
+
+    background-color: #008b21;
+    border-color: #008b21;
+}
+
+
+.btn-primary:hover{
+
+    background-color: #008b21;
+    border-color: #008b21;
+}
+
+
+.table>tbody>tr>th{
+
+ padding: 2px;
+}
+.estilos-select2{
+
+width: 100%; border: solid;
+}
+
+.container {
+
+width: 48%;
+}
+
+.mayus {
+
+text-transform: uppercase;
+}
+
+.th-fecha{
+
+color: white;
+background: #008b21;
+height: 10px !important;
+border-left: 23px solid white;
+}
+
+
+.th-verdes {
+
+color: white;
+background: #008b21;
+height: 10px !important;
+
+
+
+}
+
+.logos{
+
+    padding-bottom: 21px;
+}
+
+.tabla-matricula {
+
+border: 1px solid #008b21 !important;
+
+}
+
+
+.borde-derecho {
+
+border-right: 1px solid #008b21 !important;
+
+
+}
+
+.borde-izquierdo {
+
+border-left: 1px solid #008b21 !important;
+
+}
+
+
+.th-verdes-bordes-blancos{
+
+border-left: 1px solid white;
+}
+
+.td-blancos-bordes-verdes{
+
+border-left: 1px solid #008b21 !important;
+border-right: 1px solid #008b21 !important;
+}
+
+.btn{
+
+
+border-radius: 0px !important;
+
+}

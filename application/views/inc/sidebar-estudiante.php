@@ -8,13 +8,15 @@
 
             <li><a href="<?=base_url('estudiante')?>"><i class="fa fa-home active"></i> Inicio </a> </li>
 
-            <li><a><i class="fa fa-user"></i>Notas <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-edit"></i>Notas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
 
 
-                    <li><a href="<?=base_url("coordinacion-academica/gestionar-estudiantes")?>">Notas del semestre actual</a></li>
-                    <li><a href="<?=base_url("coordinacion-academica/gestionar-estudiantes")?>">Historial</a></li>
+                    <li><a href="<?=base_url("estudiante/notas")?>">Notas del semestre actual</a></li>
 
+
+                <!--    <li><a href="<?/*=base_url("estudiante/HistorialNotas")*/?>">Historial</a></li>
+-->
 
                 </ul>
             </li>

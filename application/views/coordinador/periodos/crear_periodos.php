@@ -49,14 +49,14 @@
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Semestre <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Período <span>*</span> <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
 
                                             <select name="mes" required class="form-control" id="">
                                                 <option value="">SELECCIONE</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
 
                                             </select>
 
@@ -106,8 +106,9 @@
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <div class="col-md-4 col-md-offset-5">
-                                            <button type="reset" class="btn btn-primary">Cancelar</button>
-                                            <button id="send" type="submit" class="btn btn-success">Aceptar</button>
+                                            <button id="send" type="submit" class="btn btn-primary">Aceptar</button>
+                                            <button type="reset" class="btn btn-success">Cancelar</button>
+
                                         </div>
                                     </div>
                                 </form>

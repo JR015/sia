@@ -15,7 +15,7 @@
 
                             <div class="col-xs-10">
 
-                                <h2>Matricula financiera</h2>
+                                <h2>Matricula</h2>
 
                             </div>
 
@@ -28,7 +28,9 @@
                     <div class="x_content">
 
 
-                        <form id="form-matricula" class="form-horizontal" method="post" action="<?=base_url('coordinador/matriculaFinanciera')?>" onsubmit="return matricular()">
+                        <!-- -->
+
+                        <form id="form-matricula" class="form-horizontal" method="post" action="<?=base_url('coordinador/matriculaFinanciera')?>" onsubmit=" matricular()" >
 
 
                             <div class="form-group">
@@ -102,6 +104,7 @@
 
 
                                     <input disabled   type="text" id="programa" class="form-control">
+                                    <input    type="hidden" name="codigo-programa" id="codigo-programa" class="form-control">
 
                                 </div>
 
@@ -117,7 +120,7 @@
                                 <label class="col-md-1 control-label" for="name">Semestre</label>
                                 <div class="col-md-3">
 
-                                    <input disabled   type="text" id="semestre" class="form-control">
+                                    <input readonly   type="text" name="semestre" id="semestre" class="form-control">
 
                                 </div>
 
@@ -129,11 +132,11 @@
                                 </div>
 
 
-                                <label class="col-md-1 control-label"  for="name">Período </label>
+                                <label class="col-md-1 control-label"  for="name">Grupo </label>
                                 <div class="col-md-4">
 
 
-                                    <input disabled   type="text" id="periodo" class="form-control">
+                                    <input disabled   type="text" id="numero" class="form-control">
 
                                 </div>
 
@@ -175,66 +178,4 @@
 <!-- /page content -->
 
 
-<div class="modal modal-wide2 fade" id="modal-buscar-estudiante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">
-
-                    <i class="fa fa-bars"></i>
-                    <b id="titulo-modal">Buscar estudiante</b></h4>
-            </div>
-
-
-            <form id="crear-grupo" class="form-horizontal" method="post" action="<?= base_url('grupo/crear') ?>"
-                  onsubmit="return crearGrupo()">
-                <div class="modal-body">
-
-
-                    <table id="datatable-estudiante" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-
-                            <th width="150">Documento</th>
-                            <th>Nombres y apellidos</th>
-
-                            <th  class="width100px">Seleccionar</th>
-
-                        </tr>
-                        </thead>
-                        <tbody >
-
-                        <?php
-
-                            foreach ($estudiantes as $estudiante){
-
-
-
-                                $nomres_apellidos = "'".$estudiante['nombres'].' '.$estudiante['apellidos']."'";
-
-
-                                echo '<tr>
-
-                                        <td>' . $estudiante['documento'] . '</td>
-                                        <td>' . $estudiante['nombres'].' '.$estudiante['apellidos'] . '</td>
-                                        <td class="text-center"><a href="javascript:seleccionarEstudiante(' . $estudiante['documento'] . ','.$nomres_apellidos.')" class="fa fa-check"></a></td>
-                                    
-                                    </tr>';
-
-                            }
-
-                        ?>
-
-
-                        </tbody>
-
-                    </table>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
 

@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+
 class Usuario extends CI_Controller {
 
 	/**
@@ -27,6 +29,9 @@ class Usuario extends CI_Controller {
         parent::__construct();
 
 
+        $this->load->model("Usuario_model","usuario");
+
+
 
     }
 
@@ -34,10 +39,29 @@ class Usuario extends CI_Controller {
 
 
 
-        $datos['titulo'] = "Cambiar clave de acceso";
+        $datos['titulo'] = "SIA - Cambiar clave de acceso";
         $datos['contenido'] = '../cambiar_clave/cambiar_clave_de_acceso';
         $datos['js'] = array("sia/cambiarClave.js");
-        $this->load->view("coordinador/plantilla", $datos);
+
+
+        $tipo = $this->session->userdata('tipo');
+
+
+        $ruta = "";
+
+        if ($tipo==ESTUDIANTES){
+
+
+
+            $ruta="estudiante";
+        }else if ($tipo==COORDINADORES){
+
+
+            $ruta="coordinador";
+        }
+
+
+        $this->load->view($ruta."/plantilla", $datos);
 
 
     }

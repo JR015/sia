@@ -12,7 +12,7 @@ function filtrarAsignatura() {
 
     $.ajax({
         type: 'POST',
-        url: baseUrl+"coordinador/filtrarAsignatura",
+        url: BASE_URL+"coordinador/filtrarAsignatura",
         data:  {nombre:nombre},
         success: function (datos) {
 
@@ -43,7 +43,7 @@ function abrirModalCrearAsignatura() {
 function abrirModalEditarAsignatura(codigo) {
 
     $.ajax({
-        url: baseUrl+"coordinador/consultarAsignatura",
+        url: BASE_URL+"coordinador/consultarAsignatura",
         type: "POST",
         data: {codigo: codigo},
         success: function (resp) {
@@ -56,7 +56,7 @@ function abrirModalEditarAsignatura(codigo) {
                 $("#nombre").val(asignatura[i].nombre);
                 $("#abreviatura").val(asignatura[i].abreviatura);
                 $("#programa").val(asignatura[i].programa);
-                $("#horas-semanales").val(asignatura[i].horas_semanales);
+                $("#creditos").val(asignatura[i].creditos);
 
 
             });

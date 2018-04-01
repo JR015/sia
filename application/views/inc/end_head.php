@@ -11,7 +11,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="<?=base_url()?>" class="site_title"><i class="fa fa-home"></i> <span>SIA</span></a>
+                    <a href="<?=base_url()?>" class="site_title"><i class="fa fa-home"></i> <span>SIA - <?=$this->session->userdata('periodo') ?> </span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -22,8 +22,8 @@
                         <img src="<?=base_url()?>assets/img/img.jpg" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span>Bienvenido,</span>
-                        <h2><?php echo $this->session->userdata('nombres')?></h2>
+                        <span>Bienvenido</span>
+                        <h2><?php /* echo $this->session->userdata('nombres') */?></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->

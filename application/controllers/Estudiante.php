@@ -1,7 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Estudiante extends CI_Controller
+
+require_once APPPATH.'controllers/Usuario.php';
+
+class Estudiante extends Usuario
 {
 
     /**
@@ -21,6 +24,7 @@ class Estudiante extends CI_Controller
      */
 
     public $login;
+    public $peridoActual;
 
     function __construct()
     {
@@ -32,6 +36,8 @@ class Estudiante extends CI_Controller
         $this->load->model("Estudiante_model", "estudiante");
 
 
+       $this->peridoActual= $this->session->userdata('periodo');
+
         if ($this->session->userdata('tipo') != ESTUDIANTES) {
 
             redirect(base_url());
@@ -42,28 +48,64 @@ class Estudiante extends CI_Controller
     function index(){
 
 
+
+
         $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
-        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'estudiante.js');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'estudiante2.js');
 
         $datos['titulo'] = "SIA - Estudiantes";
 
-        //  $datos['periodo'] = $this->consultarPeriodoAcademicoActual();
-
-         $datos['periodo'] = "2018A";
-
-        /*
-        $datos['programas'] = $this->coordinador->consultarTodosLosProgramas();
-        $datos['dg'] = $this->coordinador->consultarEstudiantesInscritos("DG");
-        $datos['ap'] = $this->coordinador->consultarEstudiantesInscritos("AP");
-        $datos['cd'] = $this->coordinador->consultarEstudiantesInscritos("CD");
-        $datos['ti'] = $this->coordinador->consultarEstudiantesInscritos("TI");
-        $datos['mi'] = $this->coordinador->consultarEstudiantesInscritos("MI");
-
-        $datos['total'] = $this->coordinador->consultarEstudiantesInscritos("");
-
-*/
         $datos['contenido'] = '../estudiante/inicio/contenido';
+
+         $this->load->view("estudiante/plantilla", $datos);
+
+
+    }
+
+
+    function notas($opcion=1,$programa=1, $periodo=1){
+
+
+
+
+
+        if ($programa==1){
+
+
+            $this->vistaNotasSemestreActual();
+
+        }else if ($opcion=="de"){
+
+
+          $this->vistaNotasPorSemestre($programa,$periodo);
+
+
+
+        }
+
+
+
+
+
+    }
+
+
+    function HistorialNotas(){
+
+
+
+
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'datatables/jquery.dataTables.min.js', 'datatables/dataTables.bootstrap.min.js', 'datatables/dataTables.responsive.min.js', 'estudiante2.js');
+
+        $datos['titulo'] = "SIA - Historial de Notas";
+
+        $datos['contenido'] = '../estudiante/notas/hostorial';
+
         $this->load->view("estudiante/plantilla", $datos);
+
 
 
     }
@@ -71,11 +113,45 @@ class Estudiante extends CI_Controller
 
 
 
+    function vistaNotasSemestreActual($programa=1, $periodo=1){
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'estudiante.js');
+
+        $datos['titulo'] = "SIA - Notas";
 
 
 
 
+        $datos['programas'] = $this->estudiante->consultarProgramasMatriculados($this->login);
 
+
+        $datos['contenido'] = '../estudiante/notas/semestre_actual';
+        $this->load->view("estudiante/plantilla", $datos);
+
+
+    }
+
+    function vistaNotasPorSemestre($programa=1, $periodo=1){
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css','select2/select2.min.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','filtrarMunicipios.js','select2/select2.min.js','select2/es.js', 'estudiante.js');
+
+        $datos['titulo'] = "SIA - Estudiantes";
+
+
+
+
+        $datos['asignaturas'] = $this->estudiante->consultarMateriasMatriculadas($this->login,$programa,$periodo);
+
+
+        $datos['contenido'] = '../estudiante/notas/por_programa_y_periodo';
+        $this->load->view("estudiante/plantilla", $datos);
+
+
+    }
 
 
 

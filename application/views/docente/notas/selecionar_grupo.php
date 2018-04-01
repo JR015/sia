@@ -10,28 +10,25 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Listado de propuestas a evaluar</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </ul>
+
+                                <h2 class="mayus">Seleccionar la asignatura a evaluar en el <b> corte #<?=$corte?></b> </h2>
+
+
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-
-
-
-                                <!--
-                                                                <p class="text-muted font-13 m-b-30">
-                                                                    Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                                                                </p>
-                                                                -->
+                            
                                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"  >
                                     <thead>
                                     <tr>
 
                                         <th>Asignatura</th>
-                                        <th width="150">Grado</th>
-                                        <th width="50">Digitar</th>
+                                        <th>Docente</th>
+
+                                        <th width="50">Semestre</th>
+                                        <th width="50">Jornada</th>
+                                        <th width="50">Grupo</th>
+
 
 
                                     </tr>
@@ -41,17 +38,18 @@
 
                                     <?php
 
-                                        foreach ($carga_academica as $asignatura){
+                                        foreach ($grupos as $grupo){
 
 
                                             echo '<tr>
                                         
                                                
-                                                <td>' . $asignatura['nombre'] . '</td>
-                                                 <td>' . $asignatura['grado'] . '</td>
-                                                 <td class="text-center"><a  href="javascript:abrirListadoEstudiantes(' . $asignatura['codigo'] . ');" class="fa fa-pencil"></a></td>
+                                                <td><a  href="'.base_url('coordinador/notas/digitar/'.strtolower( $grupo['codigo'])).'">' . $grupo['nombre'] . '</a></td>
                                                
-                                                 
+                                                <td>'.$grupo['docente'].'</td>
+                                                 <td>'.$grupo['semestre'].'</td>
+                                                 <td>'.$grupo['jornada'].'</td>
+                                                 <td>'.$grupo['numero'].'</td>
 
                                             </tr>';
 
@@ -73,14 +71,3 @@
                 </div>
             </div>
         </div>
-        <!-- /page content -->
-
-        <script !src="">
-
-            
-            function abrirListadoEstudiantes(asignatura) {
-
-                alert(asignatura);
-            }
-            
-        </script>

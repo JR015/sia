@@ -24,26 +24,6 @@ $(document).ready(function () {
 
 
 
-function filtrarGrupo() {
-
-
-    var nombre = $('#filtro-grupo').val();
-
-
-    $.ajax({
-        type: 'POST',
-        url: baseUrl + "grupo/filtrar",
-        data: {nombre: nombre},
-        success: function (datos) {
-            $('#agrega-registros').html(datos);
-        }
-    });
-
-
-    $("#datatable-grupos").DataTable();
-
-    return false;
-}
 
 
 function abrirModalCrearGrupos() {
@@ -63,7 +43,7 @@ function abrirModalEditarDocente(documento) {
 
 
     $.ajax({
-        url: baseUrl + "docente/consultar",
+        url: BASE_URL + "docente/consultar",
         type: "POST",
         data: {documento: documento},
         success: function (resp) {
@@ -114,16 +94,43 @@ function generarCodigoDeGrupo() {
 
 
     var programa = $("#programa").val();
+
     var periodo = $("#periodo").val();
+
     var jornada = $("#jornada").val();
-    var numeroSemestre = $("#numero-semestre").val();
+    var semestre = $("#numero-semestre").val();
+    var numeroGrupo = $("#numero").val();
 
 
-    if (!programa == "" && !jornada == "") {
+    if (!programa == "" && !jornada == "" ) {
 
-       $("#codigo").val(programa+"-"+numeroSemestre+"-"+jornada+"-" + periodo);
 
-      //  $("#codigo").val(programa+"-"+numeroSemestre+""+jornada+"" + semestre);
+
+        $.ajax({
+            type: 'POST',
+            url: BASE_URL + "coordinador/consultarProximoNumeroDeGrupo",
+            data: {programa: programa,semestre:semestre,jornada:jornada},
+            success: function (datos) {
+
+
+
+
+                $("#numero").val(datos);
+
+
+
+
+                numeroGrupo = $("#numero").val();
+
+                $("#codigo").val(programa+semestre+jornada+numeroGrupo+"-" + periodo);
+            }
+        });
+
+
+
+
+
+
     }
 
 
@@ -134,6 +141,7 @@ function generarCodigoDeGrupo() {
 
 function crearGrupo() {
 
+    event.preventDefault();
 
     $.ajax({
         type: $('#crear-grupo').attr('method'),
@@ -150,12 +158,15 @@ function crearGrupo() {
                 $('#mensaje').html(mensaje).show(200).delay(4000).hide(200);
 
 
-                $('#crear-grupo')[0].reset();
+
+                $("#numero").val("");
 
                 $("#grado").focus();
+                $("#jornada").val("");
 
 
-                filtrarGrupo();
+
+
 
             } else {
 
@@ -175,6 +186,6 @@ function crearGrupo() {
     });
 
 
-    return false;
+
 }
 

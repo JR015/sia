@@ -15,7 +15,7 @@
 
                             <div class="col-xs-10">
 
-                                <h2>Gestonar grupos</h2>
+                                <h2>Gestionar grupos</h2>
 
                             </div>
 
@@ -47,6 +47,7 @@
                                 <th>Programa</th>
                                 <th width="10px">Semestre</th>
                                 <th  width="10px">Jornada</th>
+                                <th  width="10px">Grupo</th>
 
                             </tr>
                             </thead>
@@ -63,6 +64,7 @@
                                         <td>' . $grupo['programa'] . '</td>
                                          <td class="text-center">' . $grupo['semestre'] . '</td>
                                          <td class="text-center">' .$grupo['jornada'] . '</td>
+                                             <td class="text-center">' .$grupo['numero'] . '</td>
                  
                                       </tr>';
 
@@ -141,7 +143,7 @@
                                 <option value="I">I</option>
                                 <option value="II">II</option>
                                 <option value="III">III</option>
-                                <option value="IV">IV</option>
+
                             </select>
 
 
@@ -153,7 +155,7 @@
                     <div class="form-group">
 
                         <label class="col-md-2 control-label" for="name">Código </label>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
 
 
                             <input required id="codigo" name="codigo" type="text" readonly class="form-control ">
@@ -172,6 +174,15 @@
                                 <option value="S">Sábados</option>
 
                             </select>
+
+                        </div>
+
+
+                        <label class="col-md-1 control-label" for="name">Número </label>
+                        <div class="col-md-1">
+
+
+                            <input required id="numero"  name="numero" type="text" readonly class="form-control ">
 
                         </div>
 

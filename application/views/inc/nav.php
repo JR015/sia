@@ -9,10 +9,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="<?=base_url()?>assets/img/img.jpg" alt=""><?php echo $this->session->userdata('nombres')?>
+                        <img src="<?=base_url('assets/img/img.jpg')?>" alt=""><?php echo $this->session->userdata('nombres')?>
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
+
+
+
+
 
                         <li>
 
@@ -51,7 +55,7 @@
                                 <span>Cambiar clave de acceso</span>
                             </a>
                         </li>
-                        <li><a href="javascript:;">Ayuda</a></li>
+
                         <li><a href="<?=base_url('sesion/cerrar')?>"><i class="fa fa-sign-out pull-right"></i> Cerrar sesión</a></li>
                     </ul>
                 </li>

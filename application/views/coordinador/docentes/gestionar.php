@@ -44,7 +44,7 @@
                                 <div class="col-md-9">
 
                                     <input placeholder="Nombres o apellidos" id="filtro-docente" type="text"
-                                           class="form-control" onkeyup="return filtrarDocente()">
+                                           class="form-control mayus" onkeyup="return filtrarDocente()">
 
                                 </div>
 
@@ -61,8 +61,8 @@
                             <tr>
 
                                 <th width="150">Documento</th>
-                                <th>Apellidos y nombres</th>
-                                <th width="200">Correo</th>
+                                <th>nombres y apellidos</th>
+
                                 <th width="50">Editar</th>
 
 
@@ -102,9 +102,7 @@
 
             -->
 
-            <form id="crear-docente" class="form-horizontal" method="post"
-                  action="<?= base_url('coordinador/registrarDocente') ?>"  onsubmit="return registrarDocente();"
-            >
+            <form id="crear-docente" class="form-horizontal" method="post" action="<?= base_url('coordinador/registrarDocente') ?>"  onsubmit=" registrarDocente();">
                 <div class="modal-body">
 
 
@@ -127,12 +125,11 @@
                         </div>
 
 
+
                     </div>
 
-
                     <div class="form-group">
-
-                        <label class="col-md-2 control-label" for="name">Apellidos y Nombres*</label>
+                        <label class="col-md-2 control-label" for="name">Nombres*</label>
                         <div class="col-md-10">
                             <input required id="nombres" name="nombres" type="text" class="form-control mayus">
 
@@ -141,14 +138,30 @@
 
                     </div>
 
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label" for="name">Apellidos*</label>
+                        <div class="col-md-10">
+                            <input required id="apellidos" name="apellidos" type="text" class="form-control mayus">
+
+                        </div>
+                    </div>
 
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label" for="name">Correo*</label>
-                        <div class="col-md-10">
+                        <label class="col-md-2 control-label" for="name">Correo Institucional</label>
+                        <div class="col-md-4">
+                            <input id="correo-institucional" name="correo-institucional" type="email" class="form-control mayus">
+
+                        </div>
+
+                        <label class="col-md-1 control-label" for="name">Correo*</label>
+                        <div class="col-md-5">
                             <input id="correo" name="correo" type="email" class="form-control mayus">
 
                         </div>
+
+
 
 
                     </div>
@@ -159,14 +172,14 @@
                         <label class="col-md-2 control-label" for="name">Lugar de recidencia*</label>
                         <div class="col-md-4">
 
-                            <select required class="form-control select" name="municipio" id="municipio"
-                                    multiple="multiple" style="width: 100%; border: solid;"></select>
+                            <select required class="form-control lugares" name="municipio" id="municipio"
+                                    style="width: 100%"></select>
 
                         </div>
 
                         <label class="col-md-1 control-label" for="name">Dirección*</label>
                         <div class="col-md-5">
-                            <input required id="direccion" name="direccion" type="text" class="form-control mayus">
+                            <input  id="direccion" name="direccion" type="text" class="form-control mayus">
 
                         </div>
 
@@ -178,7 +191,7 @@
 
                         <label class="col-md-2 control-label" for="name">Fecha nacimiento*</label>
                         <div class="col-md-4">
-                            <input required id="fecha-nacimiento" name="fecha-nacimiento" type="date"
+                            <input  id="fecha-nacimiento" name="fecha-nacimiento" type="date"
                                    class="form-control">
 
                         </div>
@@ -198,18 +211,6 @@
                         </div>
 
 
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label col-md-2 col-sm-3 col-xs-12">Profesiones <span
-                                class="required">*</span></label>
-                        <div class="col-md-10 col-sm-9 col-xs-12">
-                            <input id="profesiones" name="profesiones" type="text" class="tags form-control mayus"
-                                   value=""/>
-                            <div id="suggestions-container"
-                                 style="position: relative; float: left; width: 500px; margin: 10px;"></div>
-                        </div>
                     </div>
 
 
@@ -252,8 +253,9 @@
 
 
                 <div class="modal-footer">
-                    <input type="button" data-dismiss="modal" value="Cancelar" class="btn btn-success"/>
                     <input type="submit" id="bt-operacion" value="Crear" class="btn btn-primary"/>
+                    <input type="button" data-dismiss="modal" value="Cancelar" class="btn btn-success"/>
+
                 </div>
             </form>
         </div>

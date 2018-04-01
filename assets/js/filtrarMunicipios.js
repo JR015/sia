@@ -8,18 +8,14 @@ $(document).ready(function () {
 
         templateResult: format,
         allowClear:true,
-        placeholder: 'Escribir',
-        maximumSelectionLength: 1,
-        minimumInputLength: 1,
-        dropdownParent: $("#modal-registrar"),
+        placeholder: 'BUSCAR MUNICIPIO',
 
         ajax: {
-            url: baseUrl+"/coordinador/consultarMunicipios/",
+            url: BASE_URL+"/coordinador/consultarMunicipios/",
             dataType: 'json',
             data: function (params) {
                 var query = {
-                    term: params.term,
-                    codigo: "123"
+                    term: params.term
                 }
                 return query;
             },

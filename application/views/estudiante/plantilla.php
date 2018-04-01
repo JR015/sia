@@ -9,6 +9,9 @@ $this->load->view("inc/nav");
 $this->load->view("docente/".$contenido);
 $this->load->view("inc/start_footer");
 $this->load->view("inc/js");
+
+
+
 ?>
 
 <?php
@@ -26,7 +29,8 @@ if(isset($js)) {
 
 <?php
 
-$this->load->view("inc/end_footer",$periodo);
+
+$this->load->view("inc/end_footer");
 
 ?>
 

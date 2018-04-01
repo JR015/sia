@@ -56,34 +56,37 @@ $route['docente'] = 'docente';
 $route['cambiar-clave-de-acceso'] = 'usuario';
 
 $route['docente/selecionar-grupo'] = 'docente/vista_selecionar_grupo';
-$route['coordinacion-academica'] = 'coordinador';
+$route['registro-y-control'] = 'coordinador';
 $route['estudiante'] = 'estudiante';
 
-$route['coordinacion-academica/listado-matriculas'] = 'coordinador/vistaListadoDeMatriculas';
+$route['registro-y-control/listado-matriculas'] = 'coordinador/vistaListadoDeMatriculas';
 
 $route['incio/coordinacion-academica'] = 'sesion/vistaInicioCordinacion';
 $route['incio/estudiante'] = 'sesion/vistaInicioEstudiante';
 $route['incio/docente'] = 'sesion/vistaInicioDocente';
 
 
-$route['coordinacion-academica/gestionar-docente'] = 'coordinador/vistaGestionarDocente';
-$route['coordinacion-academica/periodos-academicos'] = 'coordinador/vistaCrearPeriodos';
+$route['registro-y-control/gestionar-docente'] = 'coordinador/vistaGestionarDocente';
+$route['registro-y-control/periodos-academicos'] = 'coordinador/vistaCrearPeriodos';
 
-$route['coordinacion-academica/inscripciones'] = 'coordinador/vistaInscripciones';
-$route['coordinacion-academica/listado-inscripciones'] = 'coordinador/vistaListadodeInscripciones';
+$route['registro-y-control/inscripciones'] = 'coordinador/vistaInscripciones';
+$route['registro-y-control/listado-inscripciones'] = 'coordinador/vistaListadodeInscripciones';
 
-$route['coordinacion-academica/gestionar-estudiantes'] = 'coordinador/vistaGestionarEstudiante';
-$route['coordinacion-academica/gestionar-asignaturas'] = 'coordinador/vistaGestionarAsignatura';
-$route['coordinacion-academica/gestionar-grupos'] = 'coordinador/vistaGestionarGrupos';
-$route['coordinacion-academica/matriculas'] = 'coordinador/vistaNuevaMatricula';
-
-
-$route['coordinacion-academica/planes-de-estudio'] = 'docente/vistaPlanesDeEstudio';
-$route['coordinacion-academica/cargas-academicas'] = 'docente/vistaCargasAcademicas';
+$route['registro-y-control/gestionar-estudiantes'] = 'coordinador/vistaGestionarEstudiante';
+$route['registro-y-control/gestionar-asignaturas'] = 'coordinador/vistaGestionarAsignatura';
+$route['registro-y-control/gestionar-grupos'] = 'coordinador/vistaGestionarGrupos';
+$route['registro-y-control/nueva-matricula'] = 'coordinador/vistaNuevaMatricula';
 
 
 
-$route['404_override'] = '';
+
+
+$route['registro-y-control/planes-de-estudio'] = 'docente/vistaPlanesDeEstudio';
+$route['registro-y-control/ver-cargas-academicas'] = 'coordinador/vistaCargasAcademicasDocentes';
+
+
+
+$route['404_override'] = 'error/error404';
 $route['translate_uri_dashes'] = FALSE;
 
 

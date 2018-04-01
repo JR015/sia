@@ -24,6 +24,8 @@ function comprobarClaves() {
     }
 
 
+  //  alert("Clave nueva :"+claveNueva+" - "+"Clave confirmada :" +claveConfirmada );
+
     return false;
 }
 
@@ -53,10 +55,18 @@ function cambiarClave() {
 
             }else {
 
+
+
+                window.location.href=BASE_URL+'sesion/cerrar';
+
+                /*
                 var mensaje = '<div class="alert alert-info"><strong>Exito!</strong> Se ha cambiado su clave de acceso correctamente</div>';
 
                 $("#cambiar-clave")[0].reset();
                 $('#mensaje').html(mensaje).show(200).delay(4000).hide(200);
+
+
+                */
 
             }
 

@@ -2,7 +2,7 @@
 <footer>
     <div class="pull-right">
 
-        SIA - Sistema de Información Académica <b><?=$periodo?></b>
+        SIA - Sistema de Información Académica <b><?=$this->session->userdata('periodo') ?></b>
     </div>
     <div class="clearfix"></div>
 </footer>

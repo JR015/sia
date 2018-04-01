@@ -11,7 +11,7 @@ function filtrarEstudiante() {
 
     $.ajax({
         type: 'POST',
-        url: baseUrl + "coordinador/filtrarEstudiante",
+        url: BASE_URL + "coordinador/filtrarEstudiante",
         data: {nombres: nombres},
         success: function (resp) {
 
@@ -69,6 +69,31 @@ function consultarInscripciones() {
 
 }
 
+$('.lugares').select2({
+    placeholder: 'BUSCAR',
+    minimumInputLength: 1,
+
+    ajax: {
+        url: BASE_URL + "coordinador/filtrarMunicipios",
+        data: function (params) {
+            //console.log(params);
+            return {
+                nombre: params.term, // search term
+                //page: params.id
+            };
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(JSON.parse(data), function (obj) {
+                    return {id: obj.codigo, text: obj.nombre+" - "+obj.dpto };
+                })
+            };
+        },
+        cache: true
+    }
+});
+
+
 
 function consultarMatriculas() {
 
@@ -76,7 +101,7 @@ function consultarMatriculas() {
 
     $.ajax({
 
-        url: $('#form-consulta').attr("action"),
+        url: BASE_URL+'coordinador/consultarMatriculas',
         type: "POST",
         data: $('#form-consulta').serialize(),
 
@@ -90,7 +115,7 @@ function consultarMatriculas() {
 
 
 
-
+         $("#datatable-matriculas").DataTable();
 
 
 
@@ -118,8 +143,12 @@ function deshablitarCamposDelFormularioDeInscripcion(estado) {
     $("#sexo").attr('readonly', estado);
     $("#direccion").attr('readonly', estado);
 
-    $("#telefono-fijo").attr('readonly', estado);
-    $("#telefono-celular").attr('readonly', estado);
+    $("#telefono").attr('readonly', estado);
+    $("#celular").attr('readonly', estado);
+    $("#btn-inscribir").attr('readonly', estado);
+    $("#municipio").attr('readonly', estado);
+
+
 
 
 }
@@ -130,40 +159,21 @@ function abrirModalEditarEstudiante(documento) {
 
 
     $.ajax({
-        url: baseUrl + "coordinador/consultarEstudiante",
+        url: BASE_URL + "coordinador/consultarEstudiante",
         type: "POST",
         data: {documento: documento},
         success: function (resp) {
 
-            var estudiante = eval(resp);
 
 
 
-            $.each(estudiante, function (i, item) {
+            var estudiante = JSON.parse(resp)[0];
 
-                $("#documento").val(estudiante[i].documento);
-                $("#nombres").val(estudiante[i].apellidos_nombres);
-                $("#fecha-nacimiento").val(estudiante[i].fecha_nacimiento);
-                $("#tipo-documento").val(estudiante[i].tipo_documento);
-                $("#correo").val(estudiante[i].correo);
-                $("#sexo").val(estudiante[i].sexo);
-                $("#direccion").val(estudiante[i].direccion);
+            $("#documento").val(estudiante.documento);
 
-                $("#telefono-fijo").val(estudiante[i].telefono_fijo);
-                $("#telefono-celular").val(estudiante[i].telefono_celular);
+        mostrarDatosEstudiante(estudiante);
 
 
-
-                $('#municipio').html('<option value="' + estudiante[i].municipio + '">' + estudiante[i].nombre_municipio+ '</option>');
-
-
-                $("#municipio").val(estudiante[i].municipio);
-
-
-                $('#documento').attr('readonly', true);
-                $('#tipo-documento').attr('readonly', true);
-
-            });
 
 
 
@@ -180,34 +190,100 @@ function abrirModalEditarEstudiante(documento) {
 
 }
 
+$(".mi-select2").select2({
+
+    dropdownParent: $("#modal-registrar"),
+});
+
+$('#institucion').select2({
+    placeholder: 'BUSCAR INSTITUCIÓN',
+    minimumInputLength: 1,
+    dropdownParent: $("#modal-registrar"),
+    ajax: {
+        url: BASE_URL + "coordinador/filtrarInstitucion",
+        data: function (params) {
+
+            return {
+                nombre: params.term, // search term
+                //page: params.id
+            };
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(JSON.parse(data), function (obj) {
+                    return {id: obj.codigo, text: obj.nombre + " - " + obj.municipio};
+                })
+            };
+        },
+        cache: true
+    }
+});
+
+
+
+$('.lugares').select2({
+    placeholder: 'BUSCAR',
+    minimumInputLength: 1,
+    allowClear:true,
+    dropdownParent: $("#modal-registrar"),
+
+    ajax: {
+        url: BASE_URL + "coordinador/filtrarMunicipios",
+        data: function (params) {
+            //console.log(params);
+            return {
+                nombre: params.term, // search term
+                //page: params.id
+            };
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(JSON.parse(data), function (obj) {
+                    return {id: obj.codigo, text: obj.nombre+" - "+obj.dpto };
+                })
+            };
+        },
+        cache: true
+    }
+});
 
 
 function consultarEstudiante() {
 
    var documento = $("#documento").val();
 
+   console.log(documento);
+
+
+   if(documento!="" && documento!=undefined){
+
+
 
     $.ajax({
-        url: baseUrl + "coordinador/consultarEstudiante",
+        url: BASE_URL + "coordinador/consultarEstudiante",
         type: "POST",
         data: {documento: documento},
         success: function (resp) {
 
             var estudiante = eval(resp);
 
+
+
+
+
             $.each(estudiante, function (i, item) {
 
                 $("#documento").val(estudiante[i].documento);
-                $("#nombres").val(estudiante[i].nombres);
-                $("#apellidos").val(estudiante[i].apellidos);
+                $("#nombres").val(estudiante[i].apellidos_nombres);
+
                 $("#fecha-nacimiento").val(estudiante[i].fecha_nacimiento);
                 $("#tipo-documento").val(estudiante[i].tipo_documento);
                 $("#correo").val(estudiante[i].correo);
                 $("#sexo").val(estudiante[i].sexo);
                 $("#direccion").val(estudiante[i].direccion);
 
-                $("#telefono-fijo").val(estudiante[i].telefono_fijo);
-                $("#telefono-celular").val(estudiante[i].telefono_celular);
+                $("#telefono").val(estudiante[i].telefono_fijo);
+                $("#celular").val(estudiante[i].telefono_celular);
 
 
 
@@ -241,6 +317,7 @@ function consultarEstudiante() {
         }
     });
 
+   }
 
 }
 
@@ -312,15 +389,18 @@ function inscribirEstudiante() {
 
 }
 
-function actualizarEstudiante() {
+function editarEstudiante() {
 
     event.preventDefault();
 
     $.ajax({
-        type: $('#form-editar-estudiante').attr('method'),
-        url: $('#form-editar-estudiante').attr('action'),
+        type: "POST",
+        url: BASE_URL+"coordinador/editarEstudiante",
         data: $('#form-editar-estudiante').serialize(),
         success: function (resp) {
+
+
+
 
                     if(resp == '2'){
 
@@ -329,7 +409,7 @@ function actualizarEstudiante() {
                     }else{
                         var mensaje = '<div class="alert alert-warning"><strong>Advertencia!</strong>No se pudo editar </div>';
 
-
+                        $('#mensaje').html(mensaje).show(200).delay(4000).hide(200);
                     }
 
 

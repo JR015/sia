@@ -46,11 +46,11 @@ class Sesion extends CI_Controller {
 
             $tipo_usuario = $this->session->userdata('tipo');
 
-            if(strcmp($tipo_usuario,"coordinadores")==0){
+            if(strcmp($tipo_usuario,COORDINADORES)==0){
 
-                redirect(base_url('coordinacion-academica'));
+                redirect(base_url('registro-y-control'));
 
-            }else if (strcmp($tipo_usuario,"docente")==0){
+            }else if (strcmp($tipo_usuario,DOCENTES)==0){
 
                 redirect(base_url('docente'));
 
@@ -60,6 +60,8 @@ class Sesion extends CI_Controller {
 
                 redirect(base_url('estudiante'));
             }
+
+
 
         }else{
 
@@ -108,17 +110,27 @@ class Sesion extends CI_Controller {
 
         $result= $this->sesion->iniciar($documento,$clave,$tipo_usuario);
 
+
         if(count($result)>0){
+
+
+           $periodo= $this->sesion->consultarPeriodoActual();
+
 
             $datos = array(
                 "documento"=>$result[0]['documento'],
-                "nombres"=>$result[0]['apellidos_nombres'],
+                "nombres"=>$result[0]['nombres'],
                 "tipo"=>$tipo_usuario,
+                "periodo"=>$periodo
 
 
             );
 
             $this->session->set_userdata($datos);
+
+
+
+
 
 
             redirect(base_url('estudiante'));
@@ -142,6 +154,7 @@ class Sesion extends CI_Controller {
 
 
         $result= $this->sesion->iniciar($documento,$clave,$tipo_usuario);
+        $periodo= $this->sesion->consultarPeriodoActual();
 
         if(count($result)>0){
 
@@ -149,6 +162,7 @@ class Sesion extends CI_Controller {
                 "documento"=>$result[0]['documento'],
                 "nombres"=>$result[0]['apellidos_nombres'],
                 "tipo"=>$tipo_usuario,
+                "periodo"=>$periodo
 
 
             );
@@ -177,13 +191,15 @@ class Sesion extends CI_Controller {
 
 
         $result= $this->sesion->iniciar($documento,$clave,$tipo_usuario);
+        $periodo= $this->sesion->consultarPeriodoActual();
 
         if(count($result)>0){
 
             $datos = array(
                 "documento"=>$result[0]['documento'],
-                "nombres"=>$result[0]['apellidos_nombres'],
+                "nombres"=>$result[0]['nombres'],
                 "tipo"=>$tipo_usuario,
+                "periodo"=>$periodo
 
 
                                );
@@ -191,7 +207,7 @@ class Sesion extends CI_Controller {
             $this->session->set_userdata($datos);
 
 
-                redirect(base_url('coordinacion-academica'));
+                redirect(base_url('registro-y-control'));
 
 
         }else{

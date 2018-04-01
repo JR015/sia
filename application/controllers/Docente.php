@@ -1,47 +1,110 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Docente extends CI_Controller {
+class Docente extends CI_Controller
+{
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+    /**
+     * Index Page for this controller.
+     *
+     * Maps to the following URL
+     *        http://example.com/index.php/welcome
+     *    - or -
+     *        http://example.com/index.php/welcome/index
+     *    - or -
+     * Since this controller is set as the default controller in
+     * config/routes.php, it's displayed at http://example.com/
+     *
+     * So any other public methods not prefixed with an underscore will
+     * map to /index.php/welcome/<method_name>
+     * @see https://codeigniter.com/user_guide/general/urls.html
+     */
 
-	public  $login;
+    public $login;
+    public $peridoActual;
 
     function __construct()
     {
         parent::__construct();
 
         $this->login = $this->session->userdata('documento');
+        $this->peridoActual = $this->session->userdata('periodo');
 
-        $this->load->model("Docentes_model","docente");
+        $this->load->model("Docentes_model", "docente");
 
-        if(!isset($this->login)) {
 
+
+        if ($this->session->userdata('tipo') != DOCENTES) {
 
             redirect(base_url());
+
         }
     }
 
-    function index(){
+
+    public function vistaProgramasOrientados()
+    {
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js', 'docente.js');
+
+        $datos['titulo'] = "Gestionar docente";
+        $datos['programas'] = $this->docente->consultarProgramasOrientados($this->login);
+        $datos['contenido'] = '../docente/notas/selecionar_programa';
+        $this->load->view("docente/plantilla", $datos);
+
+
+    }
+
+    public function vistaVerAsignaturasOrientadas($programa)
+    {
 
 
 
         $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css');
-        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js','docente.js');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js', 'docente.js');
+        $datos['carga_academica'] = $this->docente->consultarGruposPorPrograma($this->login, $programa);
+        $datos['titulo'] = "Gestionar docente";
+        $datos['contenido'] = '../docente/notas/selecionar_asignatura';
+        $this->load->view("docente/plantilla", $datos);
+
+    }
+
+
+    public function vistaVerLitadoDeEstudiantesMatriculadosPorAsignatura($asinatura)
+    {
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js', 'docente.js', 'jquery.numeric.js');
+        $datos['estudiantes'] = $this->docente->consultarListadoDeEstudiantesMatriculadosPorAsignatura($this->login, $asinatura);
+        $datos['titulo'] = "Gestionar docente";
+        $datos['contenido'] = '../docente/notas/listado_estudiantes_matriculados';
+        $this->load->view("docente/plantilla", $datos);
+
+    }
+
+
+    public function vistaPlataformaCerrada()
+    {
+
+
+
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js', 'docente.js', 'jquery.numeric.js');
+        $datos['titulo'] = "Gestionar docente";
+        $datos['contenido'] = '../docente/notas/plataforma_cerrada';
+        $this->load->view("docente/plantilla", $datos);
+
+    }
+
+    function index()
+    {
+
+
+
+        $datos['css'] = array('jquery-ui.css', 'jquery.tagsinput.css');
+        $datos['js'] = array('jquery-ui.js', 'modalBootstrap.js', 'jquery.tagsinput.js', 'docente.js');
 
         $datos['titulo'] = "Gestionar docente";
         $datos['contenido'] = '../docente/inicio/contenido';
@@ -50,202 +113,90 @@ class Docente extends CI_Controller {
     }
 
 
-    function vista_selecionar_grupo(){
-
-
-       // $cargaAcademica = $this->docente->colsultarCargaAcademica($this->login);
-
-
-        $datos['titulo'] = "Portal docente";
-
-        $datos['contenido'] = 'notas/selecionar_grupo';
-        $this->load->view("docente/plantilla", $datos);
-
-    }
-
-
-    function vistaCargasAcademicas(){
-
-        $datos['css'] = array('jquery-ui.css');
-        $datos['js'] = array('jquery-ui.js','cargaAcademica.js', 'modalBootstrap.js');
-        $datos['grupos'] =$this->consultarGrupos();
-
-        $datos['titulo'] = "Cargas académicas";
-        $datos['contenido'] = '../coordinador/docente/carga_academica';
-        $this->load->view("coordinador/plantilla", $datos);
-
-
-    }
-
-
-    function vistaPlanesDeEstudio(){
-
-        $datos['css'] = array('jquery-ui.css');
-        $datos['js'] = array('jquery-ui.js','cargaAcademica.js');
-
-        $datos['titulo'] = "Cargas académicas";
-        $datos['contenido'] = '../coordinador/asignaturas/plan_de_estudio';
-        $this->load->view("coordinador/plantilla", $datos);
-
-
-    }
-
-    function autoCompletar()
+    function registrarNota()
     {
 
 
-
-        if (isset($_GET['term'])) {
-
-
-            $nombres = strtolower($_GET['term']);
-            $valores = $this->docente->autoCompletar($nombres);
+        $notas = $this->input->post("notas");
 
 
-            echo json_encode($valores);
+
+
+        foreach ($notas as &$nota) {
+
+
+            $valores = explode("-", $nota);
+
+
+            $datos = [
+
+
+                "asignatura_matriculada" => $valores[0],
+                "nota1" => $valores[1]
+
+            ];
+
+
+            $this->docente->registrarNota($datos);
+
         }
+
+
+        echo ":)";
+
+
     }
 
 
-
-
-    public function crear()
+    public function notas($accion = 1, $parametro = null)
     {
 
-        $operacion = $this->input->post("operacion");
+
+        if ($this->consultarFechasDigitacionNotas() > 0) {
 
 
-        $documento = $this->input->post("documento");
-        $nombres = mb_strtoupper($this->input->post("nombres"));
-        $apellidos = mb_strtoupper($this->input->post("apellidos"));
-        $fecha_nacimiento = $this->input->post("fecha-nacimiento");
-        $correo = mb_strtoupper($this->input->post("correo"));
-        $profesiones = mb_strtoupper($this->input->post("profesiones"));
-        $telefono = mb_strtoupper($this->input->post("telefono-fijo"));
-        $celular = mb_strtoupper($this->input->post("telefono-celular"));
+            if ($accion == 1 || $accion == "por-programa") {
 
-        $sexo = mb_strtoupper($this->input->post("sexo"));
+                $this->vistaProgramasOrientados();
 
-        $direccion = mb_strtoupper($this->input->post("direccion"));
-        $lugar_de_residencia= $this->input->post("municipio");
+            } else if ($accion == "por-asignatura") {
+
+                $this->vistaVerAsignaturasOrientadas($parametro);
 
 
-
-        $datos = array(
-
-            "documento" => $documento,
-            "clave" => $documento,
-            "nombres" => $nombres,
-            "apellidos" => $apellidos,
-            "fecha_nacimiento" => $fecha_nacimiento,
-            "profesiones" => $profesiones,
-            "correo" => $correo,
-            "sexo" => $sexo,
-            "direccion" => $direccion,
-            "telefono_fijo" => $telefono,
-            "telefono_celular" => $celular,
-            "municipio" => $lugar_de_residencia,
-
-        );
-
-        if (strcmp($operacion,'crear')==0){
+            } else if ($accion == "digitar") {
 
 
-            $existe = $this->docente->consultar($nombres);
+                $this->vistaVerLitadoDeEstudiantesMatriculadosPorAsignatura($parametro);
 
-            if (count($existe)  == 0) {
-
-                $this->docente->crear($datos);
-
-            } else {
-
-                echo -1;
 
             }
 
-
-        }else{
-
+        }else {
 
 
-            $this->docente->editar($documento,$datos);
-
-
-
+            $this->vistaPlataformaCerrada();
         }
-
-
 
     }
 
-    function filtrar()
+
+    function consultarFechasDigitacionNotas()
     {
 
-        $nombres = $this->input->post("nombres");
+
+        $result = $this->docente->consultarFechasDigitacionNotas($this->peridoActual);
 
 
-        if (isset($nombres)) {
-
-            $docentes = $this->docente->filtrar($nombres);
-
-            foreach ($docentes as $docente) {
-
-                echo '<tr>
-
-                    <td>' . $docente['documento'] . '</td>
-                    <td>' . $docente['nombres'] . '</td>
-                    <td>' . $docente['apellidos'] . '</td>
-                    <td>' . $docente['correo'] . '</td>
-                    <td class="text-center"><a href="javascript:abrirModalEditarDocente('.$docente['documento'].')" class="fa fa-edit"></a></td>
-                </tr>';
-
-            }
-        }
-
+        return count($result);
 
     }
 
 
+    function p($parametro)
+    {
 
-
-
-
-    function consultarCargaAcademica(){
-
-        $documento = $this->input->post("documento");
-
-
-        $asignaturas = $this->docente->consultarCargaAcademica($documento);
-
-
-        foreach ($asignaturas as $asignatura) {
-
-            echo '<tr>
-
-                   
-                    <td>' . $asignatura['asignaturas'] . '</td>
-                    <td>' . $asignatura['grado'] . '</td>
-                     <td class="text-center">' . $asignatura['horas_semanales'] . '</td>
-                
-                
-                </tr>';
-
-        }
-
-    }
-
-    function consultarProgramas(){
-
-
-        return  $this->programa->consultarProgramas();
-
-
-
-    }
-
-    function consultarGrupos(){
-
-        return  $this->docente->consultarGrupos();
+        echo var_dump($this->vistaVerLitadoDeEstudiantesMatriculadosPorAsignatura($parametro));
 
     }
 }

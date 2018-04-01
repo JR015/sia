@@ -4,11 +4,10 @@
         <h3>Docente</h3>
         <ul class="nav side-menu">
 
-            <li><a href="<?=base_url('coordinacion-academica')?>"><i class="fa fa-home"></i> Inicio </a> </li>
+            <li><a href="<?=base_url('docente')?>"><i class="fa fa-home"></i> Inicio </a> </li>
 
 
-                    <li><a href="<?=base_url('coordinacion-academica/periodos-academicos')?>">Notas</a></li>
-                    <li><a href="<?=base_url('coordinacion-academica/periodos-academicos')?>">Periodos académicos</a></li>
+                    <li><a href="<?=base_url('docente/notas/')?>"><i class="fa fa-edit"></i>Notas</a></li>
 
                 </ul>
 

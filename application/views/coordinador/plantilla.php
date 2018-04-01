@@ -13,7 +13,7 @@ if(isset($css)){
 }
 
 $this->load->view("inc/end_head");
-$this->load->view("inc/sidebar-coordinador");
+$this->load->view("inc/sidebar-registro-y-control");
 $this->load->view("inc/nav");
 $this->load->view("coordinador/".$contenido);
 $this->load->view("inc/start_footer");
@@ -35,7 +35,7 @@ if(isset($js)) {
 
 <?php
 
-$this->load->view("inc/end_footer",$periodo);
+$this->load->view("inc/end_footer");
 
 ?>
 

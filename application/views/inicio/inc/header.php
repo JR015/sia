@@ -29,7 +29,7 @@
     <script type="text/javascript" src="<?=base_url('assets/js/parallax-slider/modernizr.custom.28468.js')?>">    </script>
 
 
-    <script type="text/javascript" src="<?=base_url('assets/js/mis-scripts/baseUrl.js')?>">    </script>
+    <script type="text/javascript" src="<?=base_url('assets/js/mis-scripts/BASE_URL.js')?>">    </script>
 
 
 
@@ -66,12 +66,14 @@
 <!--header start-->
 <header class="head-section">
     <div class="navbar navbar-default navbar-static-top container">
+        <br>
         <div class="navbar-header">
 
             <a href="<?php echo base_url();?>"><img  src="<?=base_url('assets/img/logo2.png')?>" class="img img-responsive " alt="" /></a>
-
+            <br>
 
         </div>
+
 
     </div>
 </header>

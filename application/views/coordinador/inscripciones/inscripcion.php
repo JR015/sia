@@ -24,11 +24,20 @@
 
                                     <div class="col-xs-2">
 
-                                        <button class="right btn btn-primary full-width" onclick="abrirModalCrearEstudiante()">Nueva
+                                        <a  class="right btn btn-primary full-width" href="<?=base_url('coordinador/inscribir')?>">Nueva
 
                                             <i class="fa fa-plus-circle"></i>
+                                        </a>
+
+                                        <!--
+                                        <button class="right btn btn-primary full-width">Nueva
+
+
 
                                         </button>
+
+-->
+
                                     </div>
 
                                 </div>
@@ -46,7 +55,7 @@
 
                                     if ($total==0){
 
-                                        $total=1;
+                                        $total=0.1;
                                     }
 
                                     ?>
@@ -161,7 +170,7 @@
 
                                 <label class="col-md-2 control-label" for="name">Apellidos y nombres*</label>
                                 <div class="col-md-10">
-                                    <input required  id="nombres" name="nombres_apellidos" type="text"  class="form-control mayus">
+                                    <input   id="nombres"  name="nombres_apellidos" type="text" required class="form-control mayus">
 
                                 </div>
 
@@ -214,7 +223,7 @@
                                 <div class="col-md-4">
 
 
-                                    <select required class="form-control select" name="municipio" id="municipio" multiple="multiple" style="width: 100%; border: solid;"></select>
+                                    <select required class="form-control select" name="municipio" id="municipio" multiple="multiple" style=""></select>
 
                                 </div>
 
